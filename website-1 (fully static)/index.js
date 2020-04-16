@@ -36,7 +36,7 @@ function renderList() {
     // нулевой элемент потому что getElementsByTagName возвращает массив
     // так как некоторых тэгов может быть несколько в DOM
     // но html тэг только один и мы гарантированно знаем что он нулевой 
-    //console.log(document.getElementsByTagName('body'));
+    console.log(document.getElementsByTagName('body'));
     const $body = document.getElementsByTagName('body')[0];
 
     // По какой-то причине может оказаться что тэг не нашелся,
