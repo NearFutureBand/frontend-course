@@ -6,13 +6,11 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
-
 body .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 body .wrapper .card {
   width: 50%;
   border: 1px solid rgba(100, 100, 100, 0.5);
@@ -26,11 +24,10 @@ body .wrapper .card {
   align-items: center;
   padding: 1rem;
 }
-
-/*body .wrapper .card:hover {
+body .wrapper .card:hover {
   margin-top: 1rem;
   margin-bottom: 1rem;
   transition: all 200ms ease;
-  background-color: rgba(200,200,200, 0.2);
+  background-color: rgba(200, 200, 200, 0.2);
   cursor: pointer;
-}*/
+}
