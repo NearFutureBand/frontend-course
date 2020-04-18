@@ -1,0 +1,36 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body .wrapper .card {
+  width: 50%;
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  box-shadow: 1px 1px 10px rgba(200, 200, 200, 0.7);
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/*body .wrapper .card:hover {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transition: all 200ms ease;
+  background-color: rgba(200,200,200, 0.2);
+  cursor: pointer;
+}*/
