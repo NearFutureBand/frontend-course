@@ -11,11 +11,15 @@ class Card {
     const wrapperElement = window.document.createElement('div');
     wrapperElement.className = "card";
     wrapperElement.id = this.myId;
-    const { name: { first, last }, email, about } = this.data;
+    const { name: { first, last }, email, picture } = this.data;
     wrapperElement.innerHTML = `
-      <h2>${first} ${last}</h2>
-      <h3>${email}</h3>
-      <span>${about}</span>
+      <div class="left">
+        <img src="${picture}" width=80rem" height=80rem" />
+      </div>
+      <div class="right">
+        <h2>${first} ${last}</h2>
+        <h4>${email}</h4>
+      </div>
     `;
     this.parentElement.appendChild(wrapperElement);
   }
@@ -25,12 +29,16 @@ class Card {
   }
 
   static convertToHtml = (oneCardData) => {
-    const { name, email, about } = oneCardData;
+    const { name, email, picture } = oneCardData;
     return `
       <div class="card">
-        <h2>${name.first} ${name.last}</h2>
-        <h3>${email}</h3>
-        <span>${about}</span>
+        <div class="left">
+          <img src="${picture}" width=80rem" height=80rem" />
+        </div>
+        <div class="right">
+          <h2>${name.first} ${name.last}</h2>
+          <h4>${email}</h4>
+        </div>
       </div>
     `;
   }
