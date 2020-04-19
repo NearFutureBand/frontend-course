@@ -34,9 +34,13 @@ const makeGetRequestReturnsPromise = (url) => {
 const renderCard = (obj) => {
   return `
     <div class="card">
-      <h2>${obj.name.first} ${obj.name.last}</h2>
-      <h3>${obj.email}</h3>
-      <span>${obj.about}</span>
+      <div class="left">
+        <img src="./avatar-mock-${Math.floor(Math.random() * 3 + 1)}.png" width=80rem" height=80rem" />
+      </div>
+      <div class="right">
+        <h2>${obj.name.first} ${obj.name.last}</h2>
+        <h4>${obj.email}</h4>
+      </div>
     </div>
   `;
 }
