@@ -30,13 +30,27 @@ const makeGetRequestReturnsPromise = (url) => {
   });
 }
 
+// Вспомогательные функции
+const assignAvatar = (obj) => {
+  const pictureNumber = Math.ceil(Math.random() * 200);
+  return {
+    ...obj,
+    picture: `https://api.adorable.io/avatars/${pictureNumber}.png`,
+    pictureNumber,
+  }
+}
+
 // Функции отрисовки
 const renderCard = (obj) => {
   return `
-    <div class="card">
-      <h2>${obj.name.first} ${obj.name.last}</h2>
-      <h3>${obj.email}</h3>
-      <span>${obj.about}</span>
+    <div class="card" href="/user/${obj.pictureNumber}">
+      <div class="left">
+        <img src="${obj.picture}" width=80rem" height=80rem" />
+      </div>
+      <div class="right">
+        <h2>${obj.name.first} ${obj.name.last}</h2>
+        <h4>${obj.email}</h4>
+      </div>
     </div>
   `;
 }
@@ -54,43 +68,13 @@ const renderList = (DATA) => {
   $body.appendChild(wrapperNode);
 }
 
-// Функции запуска
-const startWithCallback = () => {
-  makeGetRequestWithCallback(
-    'https://gist.githubusercontent.com/NearFutureBand/cb7456a2e8838e4fb7b6ec73d5008fb0/raw/63d881300f26adbc1ef058328e163d64c0e6e305/json-template-data',
-    (err, response) => {
-      if (!err) {
-        renderList(JSON.parse(response));
-      } else {
-        console.log(`error in request's callback`, err);
-      }
-    }
-  )
-}
-
-const startWithPromise = () => {
-  makeGetRequestReturnsPromise('https://gist.githubusercontent.com/NearFutureBand/cb7456a2e8838e4fb7b6ec73d5008fb0/raw/63d881300f26adbc1ef058328e163d64c0e6e305/json-template-data')
-    .then(response => {
-      renderList(JSON.parse(response));
-    }).catch(err => {
-      console.log('promise error', err);
-    });
-}
-
-const startWithAsyncAwait = async () => {
+// Запуск
+(async () => {
   const DATA = await makeGetRequestReturnsPromise('https://gist.githubusercontent.com/NearFutureBand/cb7456a2e8838e4fb7b6ec73d5008fb0/raw/63d881300f26adbc1ef058328e163d64c0e6e305/json-template-data');
-  renderList(JSON.parse(DATA));
-}
-
-//startWithCallback();
-//startWithPromise();
-startWithAsyncAwait();
-//start with async/await 2
-// Анонимная асинхронная самовызывающаяся функция
-/*(async () => {
-  const DATA = await getCardsData();
-  renderList(JSON.parse(DATA));
-})();*/
+  const dataParsed = JSON.parse(DATA);
+  const dataWithAvatars = dataParsed.map(person => assignAvatar(person));
+  renderList(dataWithAvatars);
+})();
 
 
 
