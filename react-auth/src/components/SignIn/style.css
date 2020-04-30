@@ -1,3 +1,9 @@
 .sign-in {
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 1px solid rgba(200,200,200,.5);
+  border-radius: 10px;
   width: 50%;
+  display: flex;
+  flex-direction: column;
 }
