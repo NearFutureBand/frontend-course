@@ -1,0 +1,13 @@
+.sign-in {
+  padding: 1rem;
+  border: 1px solid #555;
+  border-radius: 10px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
