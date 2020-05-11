@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainPage from './pages/Main';
+import Navigator from './navigation';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainPage />
+    <Navigator />
   </React.StrictMode>,
   document.getElementById('root')
 );
