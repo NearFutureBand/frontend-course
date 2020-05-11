@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import './style.css';
 
 class TextInput extends Component {
@@ -13,8 +15,19 @@ class TextInput extends Component {
           value={this.props.valueFromProps}
         />
       </div>
-    )
+    );
   }
 }
+
+TextInput.propTypes = {
+  label: PropTypes.string,
+  onChangeFromProps: PropTypes.func,
+  valueFromProps: PropTypes.string.isRequired,
+};
+
+TextInput.defaultProps = {
+  label: '',
+  onChangeFromProps: () => {},
+};
 
 export default TextInput;

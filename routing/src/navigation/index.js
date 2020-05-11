@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 import NavBar from '../components/NavBar';
 import MainPage from '../pages/Main';
@@ -28,4 +28,4 @@ export default Navigator = () => {
       </Switch>
     </Router>
   );
-}
+};

@@ -65,7 +65,7 @@ class SignIn extends Component {
 
   renderLoader = () => {
     if (this.state.loading) {
-      return <Loader />
+      return <Loader />;
     }
   }
 
@@ -83,8 +83,8 @@ class SignIn extends Component {
         <div className="sign-in">
           <TextInput
             label="email"
-            valueFromProps={this.state.email}
-            onChangeFromProps={(event) => { this.setState({ email: event.target.value }) }}
+            //valueFromProps={this.state.email}
+            onChangeFromProps={(event) => { this.setState({ email: event.target.value }); }}
           />
           <TextInput
             label="pincode"
@@ -104,7 +104,7 @@ class SignIn extends Component {
           <Redirect to='/' />
         )}
       </div>
-    )
+    );
   }
 }
 
