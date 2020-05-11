@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +8,7 @@ import {
 import NavBar from '../components/NavBar';
 import MainPage from '../pages/Main';
 import UsersPage from '../pages/Users';
+import ProfilePage from '../pages/Profile';
 
 export default Navigator = () => {
 
@@ -15,6 +16,7 @@ export default Navigator = () => {
     <Router>
       <NavBar />
       <Switch>
+        <Route path="/users/:index" component={ProfilePage} />
         <Route path="/users">
           <UsersPage />
         </Route>

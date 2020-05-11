@@ -31,7 +31,7 @@ function UsersPage() {
         {loading && <Loader />}
         {users.map(user => (
           <Link
-            to={`/users/:${user.index}`}
+            to={`/users/${user.index}`}
             key={user._id}
           >
             <Card
