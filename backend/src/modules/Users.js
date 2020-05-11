@@ -5,7 +5,11 @@ const USERS_DATA = require('../mockData/usersData.json');
 
 router.get('/users', async (ctx) => {
   ctx.status = 200;
-  ctx.body = USERS_DATA;
+  ctx.body = USERS_DATA.map(userObject => ({
+    _id: userObject._id,
+    name: userObject.name,
+    picture: userObject.picture,
+  }));
 });
 
 router.get('/users/:id', async (ctx) => {
