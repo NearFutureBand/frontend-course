@@ -9,6 +9,7 @@ router.get('/users', async (ctx) => {
     _id: userObject._id,
     name: userObject.name,
     picture: userObject.picture,
+    index: userObject.index,
   }));
 });
 
