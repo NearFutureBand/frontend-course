@@ -23,8 +23,6 @@ body {
   min-height: 100vh;
   color: #333;
   background-color: white;
-  display: flex;
-  justify-content: center;
 }
 
 a, a:hover {
