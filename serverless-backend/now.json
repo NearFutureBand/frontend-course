@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/users/:index",
+      "destination": "api/users"
+    }
+  ],
+  "version": 2
+}
