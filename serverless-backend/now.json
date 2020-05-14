@@ -5,5 +5,24 @@
       "destination": "api/users"
     }
   ],
-  "version": 2
+  "version": 2,
+  "headers": [
+    {
+      "source": "/users",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "*"
+        }
+      ]
+    }
+  ]
 }
