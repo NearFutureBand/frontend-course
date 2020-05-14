@@ -8,7 +8,7 @@
   "version": 2,
   "headers": [
     {
-      "source": "/users",
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
