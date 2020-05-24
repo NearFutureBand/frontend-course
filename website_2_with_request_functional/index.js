@@ -14,6 +14,22 @@ const makeGetRequestWithCallback = (url, callback) => {
   xmlHttp.send(null);
 }
 
+// Промисификация
+const getRequest = (url) => {
+  return new Promise((resolve, reject) => {
+
+    makeGetRequestWithCallback(url, (err, response) => {
+      if (!err) {
+        resolve(response);
+      } else {
+        console.log(`error in request's callback`, err);
+        reject(err);
+      }
+    });
+
+  });
+}
+
 const makeGetRequestReturnsPromise = (url) => {
   return new Promise((resolve, reject) => {
     var xmlHttp = new XMLHttpRequest();
@@ -88,14 +104,15 @@ const startWithAsyncAwait = async () => {
 
 //startWithCallback();
 //startWithPromise();
-startWithAsyncAwait();
-//start with async/await 2
+//startWithAsyncAwait();
+// start with async/await 2
 // Анонимная асинхронная самовызывающаяся функция
-/*(async () => {
+/*
+(async () => {
   const DATA = await getCardsData();
   renderList(JSON.parse(DATA));
-})();*/
-
+})();
+*/
 
 
 

@@ -1,7 +1,6 @@
 class RequestMaker {
-  loading = false;
 
-  makeGetRequestWithCallback = (url, callback) => {
+  static makeGetRequestWithCallback = (url, callback) => {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = () => {
       if (xmlHttp.readyState === 4) {
@@ -18,7 +17,7 @@ class RequestMaker {
     this.loading = true;
   }
 
-  makeGetRequestReturnsPromise = (url) => {
+  static makeGetRequestReturnsPromise = (url) => {
     return new Promise((resolve, reject) => {
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = () => {
@@ -37,5 +36,3 @@ class RequestMaker {
     });
   }
 }
-
-const requestMaker = new RequestMaker();
