@@ -11,7 +11,15 @@ class Card {
     const wrapperElement = window.document.createElement('div');
     wrapperElement.className = "card";
     wrapperElement.id = this.myId;
+
+    /**
+     * name {
+     *  first: 'sds',
+     *  last: 'sdsd,
+     * }
+     */
     const { name: { first, last }, email, picture } = this.data;
+
     wrapperElement.innerHTML = `
       <div class="left">
         <img src="${picture}" width=80rem" height=80rem" />

@@ -7,11 +7,11 @@ import './style.css';
 function MainPage() {
 
   useEffect(() => {
-    (async() => {
-      const response = await axios.get('https://serverless-backend-lkpbs3th4.now.sh/api/users');
+    (async () => {
+      const response = await axios.get('https://serverless-backend.theflashofsonic.now.sh/api/users');
       console.log(response);
     })()
-   
+
   }, []);
 
   return (
