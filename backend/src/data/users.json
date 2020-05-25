@@ -54,7 +54,8 @@
       }
     ],
     "greeting": "Hello, Curtis! You have 5 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac98dee76a88eaeb1081",
@@ -111,7 +112,8 @@
       }
     ],
     "greeting": "Hello, Nikki! You have 8 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac983ed21bfcc3e35c68",
@@ -168,7 +170,8 @@
       }
     ],
     "greeting": "Hello, Barr! You have 10 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac984e4b99ebac515143",
@@ -225,7 +228,8 @@
       }
     ],
     "greeting": "Hello, Calhoun! You have 10 unread messages.",
-    "favoriteFruit": "banana"
+    "favoriteFruit": "banana",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac982930f0c7dfc0eec5",
@@ -282,7 +286,8 @@
       }
     ],
     "greeting": "Hello, Leta! You have 7 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac988069b104f1dac976",
@@ -339,7 +344,8 @@
       }
     ],
     "greeting": "Hello, Henry! You have 10 unread messages.",
-    "favoriteFruit": "banana"
+    "favoriteFruit": "banana",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac988073180d3af657d8",
@@ -396,7 +402,8 @@
       }
     ],
     "greeting": "Hello, Mary! You have 7 unread messages.",
-    "favoriteFruit": "banana"
+    "favoriteFruit": "banana",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac9861717bb3ebc8ebd1",
@@ -453,7 +460,8 @@
       }
     ],
     "greeting": "Hello, Brandi! You have 8 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   },
   {
     "_id": "5e91ac989055a3230367b654",
@@ -510,6 +518,7 @@
       }
     ],
     "greeting": "Hello, Perez! You have 9 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
   }
 ]

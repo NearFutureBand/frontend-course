@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
-    "koa-router": "^8.0.8"
+    "koa-router": "^8.0.8",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
