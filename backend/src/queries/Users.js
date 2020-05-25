@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const { readFile } = require('../helpers');
 
 const getUsers = async () => {
@@ -13,13 +15,20 @@ const getUsers = async () => {
 const getUserByIndex = async (index) => {
   let result = await readFile('../data/users.json');
   result = JSON.parse(result);
-  if (!result[index]) {
-    throw new Error('Не существует пользователя с таким index');
+  if (result[index]) {
+    delete result[index].passwordHash;
   }
   return result[index];
 }
 
+const getUserByPhone = async (phone) => {
+  const usersData = await readFile('../data/users.json');
+  const result = _.find(JSON.parse(usersData), { phone });
+  return result;
+}
+
 module.exports = {
   getUsers,
-  getUserByIndex
+  getUserByIndex,
+  getUserByPhone
 }

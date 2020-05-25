@@ -1,28 +1,34 @@
 const Router = require('koa-router');
 const router = new Router();
 
-const { handleError, makeJWT, validateJWT } = require('../helpers');
+const { handleError, makeJWT, validateJWT, hash, extractPhoneNumberFromJwt } = require('../helpers');
+const { getUserByPhone } = require('../queries/Users');
 
-/*router.post('/auth/is-user-signed-in', async (ctx) => {
+router.post('/auth/sign-in', async (ctx) => {
   try {
-    const { phone, token } = ctx.request.body;
-    const [user] = await getUserByPhone(phone);
-    const isTokenValid = validateJWT(token, user.phone);
-    if (!user || !isTokenValid) {
-      ctx.status = 422;
-      if (!user) {
-        ctx.message = `User doesn't exist`;
-        await createUser(phone);
-      }
-      if (!isTokenValid) ctx.message = 'Token is wrong or expired';
+    const { phone, password, token } = ctx.request.body;
 
-      const smsCode = '1q2q3';
-      await setVeryfingCodeToUser({ phone, code: smsCode });
-      console.log('smsCode: ', smsCode); // send sms to user
-      return;
-      // create user and send smsCode
+    const user = await getUserByPhone(token ? extractPhoneNumberFromJwt(token) : phone);
+    if (!user) {
+      throw new Error('Пользователь с таким номером телефона не найден');
     }
 
+    if (token) {
+      // validate token
+      if (!validateJWT(token, user.phone)) {
+        throw new Error('Токен некорректный или истек, пожалуйста, выполните вход');
+      }
+    } else {
+      // token is undefined, check password
+      if (!password) {
+        throw new Error('Необходимо ввести пароль');
+      }
+      if (user.passwordHash !== hash(password)) {
+        throw new Error('Пароль введен неверно');
+      }
+    }
+
+    delete user.passwordHash;
     ctx.body = {
       ...user,
       token: makeJWT({ phone: user.phone }), // update JWT
@@ -32,7 +38,7 @@ const { handleError, makeJWT, validateJWT } = require('../helpers');
   }
 });
 
-router.post('/auth/verify-code', async (ctx) => {
+/*router.post('/auth/verify-code', async (ctx) => {
   try {
     const { phone, smsCode } = ctx.request.body;
 

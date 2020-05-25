@@ -1,14 +1,19 @@
 const _ = require('lodash');
 const jsonwebtoken = require('jsonwebtoken');
 const fs = require('fs');
-
+const crypto = require('crypto');
 
 const SERVER_SECRET = '123';
 
 const handleError = (err, ctx) => {
-  console.log(err.details);
-  ctx.body = err.details;
+  console.log(err.message);
+  ctx.body = err.message;
 };
+
+const extractPhoneNumberFromJwt = (jwt) => {
+  console.log(jsonwebtoken.decode(jwt));
+  return jsonwebtoken.decode(jwt).phone;
+}
 
 const makeJWT = (payload) => {
   return jsonwebtoken.sign(payload, SERVER_SECRET, {
@@ -22,7 +27,6 @@ const validateJWT = (token, userPhone) => {
 
 const readFile = (filePath) => {
   return new Promise((resolve, reject) => {
-    console.log(`${__dirname}/${filePath}`);
     fs.readFile(`${__dirname}/${filePath}`, 'utf8', (err, contents) => {
       if (!err) {
         resolve(contents);
@@ -37,10 +41,16 @@ const saveFile = () => {
 
 }
 
+const hash = (payload) => {
+  return crypto.createHash('sha256').update(payload).digest('hex');
+}
+
 module.exports = {
   handleError,
   makeJWT,
   validateJWT,
   readFile,
   saveFile,
+  hash,
+  extractPhoneNumberFromJwt,
 };
