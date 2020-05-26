@@ -19,8 +19,10 @@ body {
 }
 
 .page {
+
   width: 100%;
   min-height: 100vh;
+  padding-top: 10vh;
   color: #333;
   background-color: white;
   display: flex;
