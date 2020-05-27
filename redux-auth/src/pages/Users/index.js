@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { Card } from '../../components';
 import './style.css';
 
-const UsersPage = () => {
+class UsersPage extends Component {
 
-  const [ users, setUsers ] = useState([]);
-  
-  useEffect(() => {
+  state = {
+    users: [],
+  }
 
-    const getUsers = async () => {
-      const response = await axios.get('http://localhost:3001/users');
-      setUsers(response.data);
-    }
-    getUsers();
-    
-  }, []); // componentDidMount
+  componentDidMount = async () => {
+    const response = await axios.get('http://localhost:3001/users');
+    this.setState({ users: response.data });
+  }
 
-  return (
-    <div className="page">
-      <div className="page-users">
-        {users.map((item, i) => {
-          return (
-            <Link
-              key={item._id}
-              to={`/users/${item.index}`}
-            >
-              <Card
-                picture={item.picture}
-                name={item.name}
-                index={item.index}
-              />
-            </Link>
-          )
-        })}
+  render () {
+    return (
+      <div className="page">
+        <div className="page-users">
+          {this.state.users.map((item, i) => {
+            return (
+              <Link
+                key={item._id}
+                to={`/users/${item.index}`}
+              >
+                <Card
+                  picture={item.picture}
+                  name={item.name}
+                  index={item.index}
+                />
+              </Link>
+            )
+          })}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default UsersPage;

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+
+import { Card } from '../../components';
+import './style.css';
 
 const ProfilePage = (props) => {
 
@@ -27,15 +31,21 @@ const ProfilePage = (props) => {
 
   if (!userData && !loading) {
     return (
-      <div>Не удалось загрузить юзера</div>
+      <div>Не удалось загрузить данные пользователя</div>
     )
   }
 
   return (
     <div className="page">
-      {loading && <span>Loading...</span>}
-      PROFILE PAGE
-      <span>{userData?.about}</span>
+      <div className="page-profile">
+        {loading && <span>Loading...</span>}
+        { userData && (
+          <Card picture={userData.picture} name={userData.name} />
+        )}
+        <span className="text-field">{userData?.email}</span>
+        <span className="text-field">{userData?.phone}</span>
+        <span className="text-field">{userData?.about}</span>
+      </div>
     </div>
   );
 }

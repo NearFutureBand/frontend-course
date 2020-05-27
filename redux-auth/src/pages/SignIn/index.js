@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { onChangePhone, onChangePassword } from '../../actions'; 
+import { onChangePhone, onChangePassword } from '../../actions';
+import './style.css';
 
 class SignInPage extends Component {
 
@@ -23,12 +24,14 @@ class SignInPage extends Component {
             onChange={this.onChange}
             value={this.props.phone}
           />
+          {<span className="text-field error-text">Error text</span>}
           <input
             type="text"
             placeholder="password"
             value={this.props.pass}
             onChange={event => this.props.onChangePassword(event.target.value)}
           />
+          {<span className="text-field error-text">Error text</span>}
           <button onClick={this.onSignIn}>Sign in</button>
         </div>
       </div>
