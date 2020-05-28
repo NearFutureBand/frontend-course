@@ -7,6 +7,7 @@ const SERVER_SECRET = '123';
 
 const handleError = (err, ctx) => {
   console.log(err.message);
+  ctx.status = 500;
   ctx.body = err.message;
 };
 
