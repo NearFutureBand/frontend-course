@@ -44,13 +44,13 @@ export const signIn = (phone, password) => {
         phone,
         password,
       });
-
       dispatch( signInSuccess(response.data) );
 
     } catch (err) {
-      console.log('err', err.message);
-      dispatch( signInFailure(err.message));
+      console.log('err', err);
+      dispatch( signInFailure(err.response.data));
     }
+    
   }
 }
 
@@ -65,11 +65,14 @@ export const autoSignIn = (token) => {
       const response = await axios.post('http://localhost:3001/auth/sign-in', {
         token,
       });
+      if (response.status !== 200) {
+        console.log('status');
+      }
 
       dispatch( signInSuccess(response.data) );
 
     } catch (err) {
-      console.log('err', err.message);
+      console.log('err', err);
       dispatch( signInFailure(err.message));
     }
   }
