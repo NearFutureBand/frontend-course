@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { onChangePhone, onChangePassword } from '../../actions';
+import { onChangePhone, onChangePassword, signIn } from '../../actions';
 import './style.css';
 
 class SignInPage extends Component {
@@ -11,7 +11,7 @@ class SignInPage extends Component {
   }
 
   onSignIn = () => {
-    //
+    this.props.signIn(this.props.phone, this.props.pass);
   }
 
   render () {
@@ -50,6 +50,7 @@ const mapStateToProps = (state) => {
 const actionsCreators = {
   onChangePhone,
   onChangePassword,
+  signIn,
 }
 
 export default connect(mapStateToProps, actionsCreators )   (SignInPage);

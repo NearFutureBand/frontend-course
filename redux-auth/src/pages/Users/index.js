@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Card } from '../../components';
 import './style.css';
+import { getUsers } from '../../actions';
 
 class UsersPage extends Component {
 
-  state = {
-    users: [],
-  }
-
-  componentDidMount = async () => {
-    const response = await axios.get('http://localhost:3001/users');
-    this.setState({ users: response.data });
+  componentDidMount = () => {
+    this.props.getUsers();
   }
 
   render () {
     return (
       <div className="page">
         <div className="page-users">
-          {this.state.users.map((item, i) => {
+          {this.props.usersFromRedux.map((item, i) => {
             return (
               <Link
                 key={item._id}
@@ -40,4 +36,11 @@ class UsersPage extends Component {
   }
 }
 
-export default UsersPage;
+const mapStateToProps = (state) => {
+  return {
+    usersFromRedux: state.users.users,
+    loading: state.users.loading,
+  }
+}
+
+export default connect( mapStateToProps, { getUsers })  (UsersPage);
