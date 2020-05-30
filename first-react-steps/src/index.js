@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
+import Stepper from './Stepper';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Stepper title="unicorns" />
+    <Stepper title="cars" />
   </React.StrictMode>,
   document.getElementById('root')
 );
