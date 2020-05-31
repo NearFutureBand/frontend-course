@@ -1,9 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  usersPage: {
     flex: 1,
-    paddingHorizontal: 10,
   },
 });
 
