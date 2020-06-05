@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ACTION_TYPES } from '../const';
 
 // 1) экщн, который показывает старт запроса 
-const getUsersStart = () =>({
+const getUsersStart = () => ({
   type: ACTION_TYPES.GET_USERS_START,
 });
 
@@ -44,4 +44,10 @@ export const getUsers = () => {
     
   }
 
+}
+
+export const sortUsersByName = () => {
+  return {
+    type: ACTION_TYPES.SORT_USERS_BY_NAME,
+  }
 }

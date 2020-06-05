@@ -77,3 +77,7 @@ export const autoSignIn = (token) => {
     }
   }
 }
+
+export const signOut = () => ({
+  type: ACTION_TYPES.SIGN_OUT,
+});
