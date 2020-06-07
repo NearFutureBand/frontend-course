@@ -1,28 +1,41 @@
-import React from 'react';
+import React, { PureComponent, Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './style.css';
 
-const Card = ({ picture, name, small }) => {
+class Card extends PureComponent {
 
-  const classNames = {
-    card: `card ${small && 'card-small'}`,
-    cardImage: `card-image ${small && 'card-image-small'}`,
-    cardContent: `card-content ${small && 'card-content-small'}`,
-  }
-
-  return (
-      <div className={classNames.card}>
-        <img
-          src={picture}
-          className={classNames.cardImage}
-          alt='avatar'
-        />
-        <div className={classNames.cardContent}>
-          <h2>{name.first}</h2>
-          <h4>{name.last}</h4>
+  render () {
+    const classNames = {
+      card: `card ${this.props.small && 'card-small'}`,
+      cardImage: `card-image ${this.props.small && 'card-image-small'}`,
+      cardContent: `card-content ${this.props.small && 'card-content-small'}`,
+    }
+  
+    console.log('card render');
+    return (
+        <div className={classNames.card}>
+          <img
+            src={this.props.picture}
+            className={classNames.cardImage}
+            alt='avatar'
+          />
+          <div className={classNames.cardContent}>
+            <h2>{this.props.name.first}</h2>
+            <h4>{this.props.name.last}</h4>
+          </div>
         </div>
-      </div>
-  )
+    )
+  }
 }
+
+Card.propTypes = {
+  picture: PropTypes.string,
+  name: PropTypes.shape({
+    first: PropTypes.string,
+    last: PropTypes.string,
+  }),
+  small: PropTypes.bool,
+};
 
 export { Card };

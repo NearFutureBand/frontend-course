@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Card } from '../../components';
 import './style.css';
-import { getUsers } from '../../actions';
+import { getUsers, sortUsersByName } from '../../actions';
 
 class UsersPage extends Component {
 
@@ -16,6 +16,7 @@ class UsersPage extends Component {
     return (
       <div className="page">
         <div className="page-users">
+          <button onClick={this.props.sortUsersByName}>Sort by name</button>
           {this.props.usersFromRedux.map((item, i) => {
             return (
               <Link
@@ -43,4 +44,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect( mapStateToProps, { getUsers })  (UsersPage);
+export default connect( mapStateToProps, { getUsers, sortUsersByName })  (UsersPage);

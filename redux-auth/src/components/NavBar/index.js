@@ -1,7 +1,8 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { signOut } from '../../actions';
 import { ROUTES } from '../../const';
 import { Card } from '../Card';
 import './style.css';
@@ -14,11 +15,14 @@ class NavBarComponent extends Component {
         <Link to={ROUTES.MAIN}>Main</Link>
         <Link to={ROUTES.USERS}>Users</Link>
         { this.props.token ? (
-          <Card
-            picture={this.props.avatar}
-            name={this.props.name}
-            small
-          />
+          <>
+            <Card
+              picture={this.props.avatar}
+              name={this.props.name}
+              small
+            />
+            <button onClick={this.props.signOut}>Sign out</button>
+          </>
         ) : (
           <Link to={ROUTES.SIGNIN}>Sign in</Link>
         )}
@@ -35,5 +39,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const NavBar = connect(mapStateToProps)(NavBarComponent);
+const NavBar = connect(mapStateToProps, { signOut })(NavBarComponent);
 export { NavBar };
