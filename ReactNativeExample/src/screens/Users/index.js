@@ -1,29 +1,28 @@
-import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, FlatList} from 'react-native';
-import axios from 'axios';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
 import Card from '../../components/Card';
 import styles from './style';
+import {getUsers} from '../../actions';
 
 function UsersScreen({navigation}) {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  dispatch({type: 'ACTION'});
+
+  const users = useSelector((state) => state.users);
+  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-    setLoading(true);
-    (async () => {
-      try {
-        const response = await axios.get(
-          'https://serverless-backend-ky9b8rmuq.now.sh/api/users',
-        );
-        setUsers(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
-    })();
-  }, []);
+    dispatch(getUsers());
+  }, [dispatch]);
 
   const renderOnePerson = ({item}) => {
     return (
@@ -41,6 +40,11 @@ function UsersScreen({navigation}) {
         data={users}
         renderItem={renderOnePerson}
       />
+      {loading && (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </View>
   );
 }
