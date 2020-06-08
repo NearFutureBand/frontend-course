@@ -134,27 +134,16 @@ class HashTable {
   }
 
   /**
-   * In order to store key-value pairs in memory from our hash table we need a
-   * way to take the key and turn it into an address. We do this through an
-   * operation known as "hashing".
-   *
-   * Basically it takes a key and serializes it into a unique number for that
-   * key.
+   * Для того чтобы хранить пары ключ-значение в памяти нам нужен способ взять ключ и превратить его в адрес памяти. Мы делаем это с помощью операции, называемой хэширование
+   * Проще говоря, берется ключ и некоим образом преобразуется в уникальное число.
    *
    *    hashKey("abc") =>  96354
    *    hashKey("xyz") => 119193
    *
-   * You have to be careful though, if you had a really big key you don't want
-   * to match it to a memory address that does not exist.
-   *
-   * So the hashing algorithm needs to limit the size, which means that there
-   * are a limited number of addresses for an unlimited number of values.
-   *
-   * The result is that you can end up with collisions. Places where two keys
-   * get turned into the same address.
-   *
-   * Any real-world hash table implementation would have to deal with this,
-   * however, we are just going to glaze over it and pretend that doesn't happen.
+   * Тут нужно быть осторожным, потому что для очень такого большого числа - может не существовать реального адреса в памяти. То есть хэширование может привести к несуществующему адресу.
+   * Поэтому алгоритм хэширования должен выдавать адреса ограниченного размера, что означает, что количество адресов ограничено для неограниченнного количества ключей.
+   * В итоге можно прийти к коллизиям. Коллиизия - это явление при котором два ключа превращаются в один и тот же адрес в результате хэширования. ( а должны в разные)
+   * Любая "настоящая" / "боевая" хэш-таблица должна уметь работать с такими ситуациями, однако в нашем примере мы просто закроем глаза на эту проблему ( в учебных проектах простейшего алгоритма хэширования достаточно)
    */
 
   /**
@@ -196,6 +185,73 @@ class HashTable {
     if (this.memory[address]) {
       delete this.memory[address];
     }
+  }
+}
+
+
+// =========================================================
+// Стэк
+// =========================================================
+// Стэк похож на список тем, что у него есть порядок. Но он ограничен только двумя функциями работы с данными: push и pop. Эти функции супер быстро работают с памятью
+class Stack {
+
+  // В качестве памяти выступает массив
+  constructor() {
+    this.list = [];
+    this.length = 0;
+  }
+
+  // Пуш добавляет данные в конец
+  push(value) {
+    this.length++;
+    this.list.push(value);
+  }
+
+  // Поп удаляет последний добавленный элемент из стека
+  pop() {
+    // Ничего не делать если у нас нет элементов
+    if (this.length === 0) return;
+
+    // Вернуть последний элемент из стека и удалить его из памяти
+    this.length--;
+    return this.list.pop();
+  }
+
+  // Посмотреть на последнее значение в стеке
+  peek() {
+    return this.list[this.length - 1];
+  }
+}
+
+// =========================================================
+// Очередь
+// =========================================================
+// Очередь очень похожа на стек, разница только в том, что элементы в очереди удаляются не с конца, а сначала. Удаление самого старого элемента, а не самого недавнего
+class Queue {
+
+  constructor() {
+    this.list = [];
+    this.length = 0;
+  }
+
+  // Это метод добавления элементов в очередь. Точно также добавление происходит в конец, как в стеке
+  enqueue(value) {
+    this.length++;
+    this.list.push(value);
+  }
+
+  // Удаление элемента с нулевой позиции
+  dequeue() {
+    // Ничего не делать, если очередь пустая
+    if (this.length === 0) return;
+
+    // Shift the first item off the start of the list and return the value.
+    this.length--;
+    return this.list.shift();
+  }
+
+  peek() {
+    return this.list[0];
   }
 }
 
@@ -273,43 +329,27 @@ class Graph {
 }
 
 /**
- * Finally you can use a graph like this:
+ * И граф можно использовать примерно так:
  *
  *     var graph = new Graph();
  *     graph.addNode(1);
  *     graph.addNode(2);
  *     graph.addLine(1, 2);
  *     var two = graph.find(1).lines[0];
- *
- * This might seem like a lot of work to do very little, but it's actually a
- * quite powerful pattern, especially for finding sanity in complex programs.
- *
- * They do this by optimizing for the connections between data rather than
- * operating on the data itself. Once you have one node in the graph, it's
- * extremely simple to find all the related items in the graph.
- *
- * Tons of things can be represented this way, users with friends, the 800
- * transitive dependencies in a node_modules folder, the internet itself is a
- * graph of webpages connected together by links.
  */
 
+// =========================================================
 // Односвязный список
+// =========================================================
 
 /**
- * Next we're going to see how a graph-like structure can help optimize ordered
- * lists of data.
- *
- * Linked lists are a very common data structure that is often used to
- * implement other data structures because of its ability to efficiently add
- * items to the start, middle, and end.
- *
- * The basic idea of a linked list is similar to a graph. You have nodes that
- * point to other nodes. They look sorta like this:
+ * Теперь посмотрим как графоподобные структуры могут помочь оптимизировать упорядоченные списки данных.
+ * Связный список это очень частоиспользуемая структура для создания других структур данных благодаря своей способности эффективно вставлять новые данные в конец, в начало и в середину списка.
+ * Базовая идея такая же как у графа - есть узлы, которые указывают на другие узлы:
  *
  *     1 -> 2 -> 3 -> 4 -> 5
  *
- * Visualizing them as a JSON-like structure looks like this:
- *
+ * Визуально в JSON-формате это выглядит как-то так:
  *     {
  *       value: 1,
  *       next: {
@@ -324,159 +364,236 @@ class Graph {
 
 class LinkedList {
 
-  /**
-   * Unlike a graph, a linked list has a single node that starts off the entire
-   * chain. This is known as the "head" of the linked list.
-   *
-   * We're also going to track the length.
-   */
-
+  // Связный список имеет один узел ( не как в графе) с которого начинается вся цепочка. Это "начало" ("голова") списка.
   constructor() {
     this.head = null;
     this.length = 0;
   }
 
-  /**
-   * First we need a way to retrieve a value in a given position.
-   *
-   * This works differently than normal lists as we can't just jump to the
-   * correct position. Instead, we need to move through the individual nodes.
-   */
-
+  // Получение данных по индексу. Тут все не так как в обычных списках, нельзя просто так взять и прыгнуть по нужному индексу. Вместо этого нужно двигаться по узлам списка.
   get(position) {
-    // Throw an error if position is greater than the length of the LinkedList
+    // Выкинуть ошибку если позиция больше чем длина связного списка
     if (position >= this.length) {
       throw new Error('Position outside of list range');
     }
 
-    // Start with the head of the list.
+    // Начинаем с головы списка
     let current = this.head;
 
-    // Slide through all of the items using node.next until we reach the
-    // specified position.
+    // Двигаемся через все элементы используя node.next пока не достигнем нужной позиции
     for (let index = 0; index < position; index++) {
       current = current.next;
     }
 
-    // Return the node we found.
+    // Возвращаем узел, который нашли
     return current;
   }
 
-  /**
-   * Next we need a way to add nodes to the specified position.
-   *
-   * We're going for a generic add method that accepts a value and a position.
-   */
-
+  // Добавление узла в определенное место. Принимает значение и позицию (индекс)
   add(value, position) {
-    // First create a node to hold our value.
+    // Создаем узел чтобы хранить значение
     let node = {
       value,
       next: null
     };
 
-    // We need to have a special case for nodes being inserted at the head.
-    // We'll set the "next" field to the current head and then replace it with
-    // our new node.
+    // Специальный кейс, когда данные вставляются в начало списка. Устанавливаем поле "next" на текущее первое значение и потом заменяем бывшее первое новым
     if (position === 0) {
       node.next = this.head;
       this.head = node;
 
-      // If we're adding a node in any other position we need to splice it in
-      // between the current node and the previous node.
+      // Если вставка идет в середну списка, нужно впихнуть его между текущим и передыдущим узлами
     } else {
-      // First, find the previous node and the current node.
+      // Сначала находим текущий и предыдущий узлы
       let prev = this.get(position - 1);
       let current = prev.next;
-      // Then insert the new node in between them by setting its "next" field
-      // to the current node and updating the previous node's "next" field to
-      // the new one.
+
+      // Вставляется новый узел посредством обозначения его next поля как текущего узла и изменением поля next предыдущего узла на новый узел
       node.next = current;
       prev.next = node;
     }
 
-    // Finally just increment the length.
+    // И увеличиваем длину на 1
     this.length++;
   }
 
-  /**
-   * The last method we need is a remove method. We're just going to look up a
-   * node by its position and splice it out of the chain.
-   */
-
+  // Удаление узла. Ищем узел по нужной позиции и вырезаем его из цепочки.
   remove(position) {
-    // We should not be able to remove from an empty list
+    // У нас не должно быть возможности удалить элемент из пустого списка
     if (!this.head) {
       throw new Error('Removing from empty list')
     }
-    // If we're removing the first node we simply need to set the head to the
-    // next node in the chain
+    // Если удаляем первый узел то нужно просто обозначить за первый следующий элемент цепочки
     if (position === 0) {
       this.head = this.head.next;
 
-      // For any other position, we need to look up the previous node and set it
-      // to the node after the current position.
+      // Для всех других случаев нам нужно найти предыдущий узел и его next перенаправить на следующий элемент за удаляемым
     } else {
       let prev = this.get(position - 1);
       prev.next = prev.next.next;
     }
 
-    // Then we just decrement the length.
+    // И декрементируем длину
     this.length--;
   }
 }
 
+// =========================================================
 // Двусвязный список
 
+// =========================================================
 
-// пример X Stack ( Стэк, FILO )
 
-class StackNode {
-  constructor(value) {
-    this.value = value;
-    this.linkToTheNext = null;
-  }
-}
 
-class Stack {
+
+
+
+
+
+// =========================================================
+// Бинарное дерево
+// =========================================================
+/**
+ * Бинарное дерево поиска это частный случай деревьев и оно отличается своей особенностью одинаково эффективно работать с любой операцией: доступ, поиск, вставка и удаление данных, потому что содержит их в отсортированном виде.
+ *
+ * Представьте последовательность чисел:
+ *
+ *     1  2  3  4  5  6  7
+ *
+ * Превращение его в дерево начиная с центра:
+ *
+ *              4
+ *           /     \
+ *        2           6
+ *      /   \       /   \
+ *     1     3     5     7
+ *    -^--^--^--^--^--^--^-
+ *     1  2  3  4  5  6  7
+ *
+ * Вот как работает бинарное дерево. Каждый узел может иметь два дочерних:
+ *
+ *     - Левый: Значение меньше чем у родительского.
+ *     - Правый: Значение больше чем у родительского.
+ *
+ * > Важно: Чтобы все это работало, все значения которые хранит дерево должны быть уникальными.
+ * Такая укладка данных делает поиск значений очень эффективным. Предположим, хотим найти 5 в дереве:
+ *
+ *             (4)         <--- 5 > 4, поэтому двигаемся вправо.
+ *           /     \
+ *        2         (6)    <--- 5 < 6, поэтому двигаемся влево.
+ *      /   \       /   \
+ *     1     3    (5)    7 <--- Хоба, нашли 5!
+ *
+ * Заметьте, что понадобилось всего лишь 3 проверки, чтобы дойти до числа 5. А если бы дерево было с 1000-ю элементов?
+ *
+ *   500 -> 250 -> 125 -> 62 -> 31 -> 15 -> 7 -> 3 -> 4 -> 5
+ *
+ * Всего 10 шагов для 1000 элементов!
+ * Другая важная вещь о бинарных деревьях поиска это то что они похожи на связные списки в том смысле что при добавлении или удалении значения придется обновить только его ближайшее окружение
+ */
+
+class BinarySearchTree {
+
+  /**
+   * Same as the previous Tree, we need to have a "root" of the binary search
+   * tree.
+   */
+
   constructor() {
     this.root = null;
-    this.n = 0;
   }
 
-  isEmpty() {
-    return this.n === 0;
+  /**
+   * In order to test if the value exists in the tree, we first need to search
+   * through the tree.
+   */
+
+  contains(value) {
+    // We start at the root.
+    let current = this.root;
+
+    // We're going to keep running as long as we have another node to visit.
+    // If we reach a `left` or `right` that is `null` then this loop ends.
+    while (current) {
+
+      // If the value is greater than the current.value we move to the right
+      if (value > current.value) {
+        current = current.right;
+
+        // If the value is less than the current.value we move to the left.
+      } else if (value < current.value) {
+        current = current.left;
+
+        // Otherwise we must be equal values and we return true.
+      } else {
+        return true;
+      }
+    }
+
+    // If we haven't matched anything then we return false.
+    return false;
   }
 
-  size() {
-    return this.n;
-  }
+  /**
+   * In order to add items to this tree we are going to do the same traversal
+   * as before, bouncing between left and right nodes depending on them being
+   * less than or greater than the value we're adding.
+   *
+   * However, this time when we reach a `left` or `right` that is `null` we're
+   * going to add a new node in that position.
+   */
 
-  push(value) {
-    const currentRoot = this.root;
-    this.root = new StackNode(value);
-    this.root.linkToTheNext = currentRoot;
-    this.n++;
-  }
+  add(value) {
+    // First let's setup our node.
+    let node = {
+      value: value,
+      left: null,
+      right: null
+    };
 
-  pop() {
-    if (this.isEmpty()) return null;
-    const oldFirst = this.root;
-    this.root = oldFirst.linkToTheNext;
-    this.n--;
-    return oldFirst.value;
+    // Special case for when there isn't any root node and we just need to add
+    // one.
+    if (this.root === null) {
+      this.root = node;
+      return;
+    }
+
+    // We start at the root.
+    let current = this.root;
+
+    // We're going to loop until we've either added our item or discovered it
+    // already exists in the tree.
+    while (true) {
+
+      // If the value is greater than the current.value we move to the right.
+      if (value > current.value) {
+
+        // If `right` does not exist, set it to our node, and stop traversing.
+        if (!current.right) {
+          current.right = node;
+          break;
+        }
+
+        // Otherwise just move on to the right node.
+        current = current.right;
+
+        // If the value is less than the current.value we move to the left.
+      } else if (value < current.value) {
+
+        // If `left` does not exist, set it to our node, and stop traversing.
+        if (!current.left) {
+          current.left = node;
+          break;
+        }
+
+        // Otherwise just move on to the left node.
+        current = current.left;
+
+        // If the number isn't less than or greater, then it must be the same and
+        // we don't do anything.
+      } else {
+        break;
+      }
+    }
   }
 }
-
-const s = new Stack();
-
-s.push('value one');
-console.log(s);
-s.push('value two');
-console.log(s);
-
-// Очередь
-
-
-
-// Бинарное дерево
