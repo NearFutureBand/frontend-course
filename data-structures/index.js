@@ -453,8 +453,7 @@ class LinkedList {
 // =========================================================
 
 /**
- * We'll start off with an extremely simple tree structure. It doesn't have any
- * special rules to it and looks something like this:
+ * Начнем с самой простой структуры дерева. Оно не имеет всяких спецефических правил и выглядит примерно так:
  *
  *     Tree {
  *       root: {
@@ -472,51 +471,39 @@ class LinkedList {
 
 class Tree {
 
-  /**
-   * The tree has to start with a single parent, the "root" of the tree.
-   */
-
+  // Дерево должно начинаться с одного родительского узла - "корня" дерева.
   constructor() {
     this.root = null;
   }
 
-  /**
-   * We need a way to traverse our tree and call a function on each node in the
-   * tree.
-   */
-
+  // Нам нужен способ обхода дерева и вызова определенной функции для каждого узла в дереве
   traverse(callback) {
-    // We'll define a walk function that we can call recursively on every node
-    // in the tree.
+    // Определяем функцию которая будет рекурсивно выполняться для каждого из узлов
     function walk(node) {
-      // First call the callback on the node.
+      // Сначала вызываем функцию callback для самого узла
       callback(node);
-      // Then recursively call the walk function on all of its children.
+      // И затем рекурсивно вызываем функцию walk для дочерних узлов текущего узла
       node.children.forEach(walk);
     }
 
-    // Now kick the traversal process off.
+    // Запускаем процесс обхода
     walk(this.root);
   }
 
-  /**
-   * Next we need a way to add nodes to our tree.
-   */
-
+  // И способ добавления узлов в дерево
   add(value, parentValue) {
     let newNode = {
       value,
       children: []
     };
 
-    // If there is no root, just set it to the new node.
+    // Если корня не существует, просто устанавливаем новый узел как корень
     if (this.root === null) {
       this.root = newNode;
       return;
     }
 
-    // Otherwise traverse the entire tree and find a node with a matching value
-    // and add the new node to its children.
+    // Во всех остальных случаях проходим по всему дереву и ищем узел у которого значение совпадает с parentValue, чтобы добавть ему новый дочерний узел с value
     this.traverse(node => {
       if (node.value === parentValue) {
         node.children.push(newNode);
@@ -572,103 +559,87 @@ class Tree {
 
 class BinarySearchTree {
 
-  /**
-   * Same as the previous Tree, we need to have a "root" of the binary search
-   * tree.
-   */
-
+  // Все как с предыдущим деревом - должен быть корневой узел
   constructor() {
     this.root = null;
   }
 
-  /**
-   * In order to test if the value exists in the tree, we first need to search
-   * through the tree.
-   */
-
+  // Для того чтобы проверять есть какое-то значение в дереве или нет, нужен метод поиска по дереву
   contains(value) {
-    // We start at the root.
+    // Начинаем с корневого узла
     let current = this.root;
 
-    // We're going to keep running as long as we have another node to visit.
-    // If we reach a `left` or `right` that is `null` then this loop ends.
+    // Будем продолжать до тех пор пока есть узел в который можно зайти.
+    // Если после шага влево или вправо узла там не будет (null), то тогда цикл завершится.
     while (current) {
 
-      // If the value is greater than the current.value we move to the right
+      // Если искомое значение (value) больше чем значение текущего узла, идем вправо
       if (value > current.value) {
         current = current.right;
 
-        // If the value is less than the current.value we move to the left.
+
+        // Если искомое значение меньше чем значение у текущего рассматриваемого узла, выбираем левый дочерний узел следующим
       } else if (value < current.value) {
         current = current.left;
 
         // Otherwise we must be equal values and we return true.
+        // В остальных случаях значения должны совпадать и тогда мы возвращаем true ( элемент с value в дереве существует)
       } else {
         return true;
       }
     }
 
-    // If we haven't matched anything then we return false.
+    // Если ничего не совпало, возвращаем фолс
     return false;
   }
 
-  /**
-   * In order to add items to this tree we are going to do the same traversal
-   * as before, bouncing between left and right nodes depending on them being
-   * less than or greater than the value we're adding.
-   *
-   * However, this time when we reach a `left` or `right` that is `null` we're
-   * going to add a new node in that position.
-   */
-
+  // Для того чтобы добавлять элементы в такое дерево нужно делать такой же обход как и в первом случае, прыгая между левыми и правыми узлами в зависимости от того меньше или больше значение которое мы добавляем по сравнению с каждым узлом дерева на нашем пути
+  // Однако теперь если мы после очередного шага влево или вправо попадаем туда, где узла уже не существует, то в этот момент в это место и нужно добавить новый узел
   add(value) {
-    // First let's setup our node.
+    // Сначала создадим узел который будем добавлять
     let node = {
       value: value,
       left: null,
       right: null
     };
 
-    // Special case for when there isn't any root node and we just need to add
-    // one.
+    // Специальный случай если дерево изначально пустое. Тогда новый узел становится корнем
     if (this.root === null) {
       this.root = node;
       return;
     }
 
-    // We start at the root.
+    // Начинаем с корня
     let current = this.root;
 
-    // We're going to loop until we've either added our item or discovered it
-    // already exists in the tree.
+    // Цикл будет выполняться до тех пор пока не добавим новый узел или обнаружим что такой уже существует в дереве
     while (true) {
 
-      // If the value is greater than the current.value we move to the right.
+      // Если добавляемое значение больше чем значение текущего узла, двигаемся вправо 
       if (value > current.value) {
 
-        // If `right` does not exist, set it to our node, and stop traversing.
+        // Если "правый" не существует, то в это место устанавливаем наш добавляемый узел и прекращаем обход
         if (!current.right) {
           current.right = node;
           break;
         }
 
-        // Otherwise just move on to the right node.
+        // В ином случае просто двигаемся дальше ( за текущий узел на следующем шаге устанавливаем правый дочерний узел)
         current = current.right;
 
-        // If the value is less than the current.value we move to the left.
+        // Если добавляемое значение меньше текущего, двигаемся влево
       } else if (value < current.value) {
 
-        // If `left` does not exist, set it to our node, and stop traversing.
+        // Если левого дочернего узла не существует, добавляем туда наш узел и выходим из цикла
         if (!current.left) {
           current.left = node;
           break;
         }
 
-        // Otherwise just move on to the left node.
+        // В ином случае двигаемся дальше в левый дочерний узел
         current = current.left;
 
-        // If the number isn't less than or greater, then it must be the same and
-        // we don't do anything.
+        // Если добавляемое значение НИ больше НИ меньше текущего то это означает, что в дереве уже есть узел с таким значением и добавлять ничего не нужно - просто выходим из цикла
       } else {
         break;
       }
