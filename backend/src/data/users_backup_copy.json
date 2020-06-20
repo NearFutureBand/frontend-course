@@ -39,7 +39,32 @@
       8,
       9
     ],
-    "friends": [],
+    "friends": [
+      {
+        "name": {
+          "first": "Barr",
+          "last": "Copeland"
+        },
+        "picture": "https://api.adorable.io/avatars/113.png",
+        "index": 2
+      },
+      {
+        "name": {
+          "first": "Nikki",
+          "last": "Lowe"
+        },
+        "picture": "https://api.adorable.io/avatars/112.png",
+        "index": 1
+      },
+      {
+        "name": {
+          "first": "Henry",
+          "last": "Stewart"
+        },
+        "picture": "https://api.adorable.io/avatars/118.png",
+        "index": 5
+      }
+    ],
     "greeting": "Hello, Curtis! You have 5 unread messages.",
     "favoriteFruit": "apple",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"

@@ -38,12 +38,42 @@ const readFile = (filePath) => {
   });
 }
 
-const saveFile = () => {
-
+const saveFile = (filePath, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(`${__dirname}/${filePath}`, JSON.stringify(data, null, '\t'), (err) => {
+      if (!err) {
+        resolve();
+      } else {
+        reject(err);
+      }
+    })
+  });
 }
 
 const hash = (payload) => {
   return crypto.createHash('sha256').update(payload).digest('hex');
+}
+
+const shortenUserInfo = (fullUserData) => {
+  return {
+    _id: fullUserData._id,
+    name: fullUserData.name,
+    picture: fullUserData.picture,
+    index: fullUserData.index,
+  }
+}
+
+const removePasswordHash = (userData) => {
+  if (userData) {
+    const newUserData = { ...userData };
+    delete newUserData.passwordHash
+    return newUserData;
+  }
+  return userData;
+}
+
+const hasUserThisFriend = (user, friendIndex) => {
+  return user.friends.map(friend => `${friend.index}`).includes(`${friendIndex}`);
 }
 
 module.exports = {
@@ -53,5 +83,8 @@ module.exports = {
   readFile,
   saveFile,
   hash,
+  shortenUserInfo,
   extractPhoneNumberFromJwt,
+  removePasswordHash,
+  hasUserThisFriend,
 };

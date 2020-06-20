@@ -2,7 +2,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 const { getUsers, getUserByIndex } = require('../queries/Users');
-const { handleError } = require('../helpers');
+const { handleError, removePasswordHash } = require('../helpers');
 
 router.get('/users', async (ctx) => {
   try {
@@ -22,7 +22,7 @@ router.get('/users/:index', async (ctx) => {
       throw new Error('Пользователя с таким index не существует');
     }
     ctx.status = 200;
-    ctx.body = result;
+    ctx.body = removePasswordHash(result);
   } catch (err) {
     handleError(err, ctx);
   }
