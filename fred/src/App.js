@@ -1,7 +1,8 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
+import styles from './App.module.css';
 
-class App extends React.Component {
+
+class App extends Component {
 
   // Стейт можно создавать прямо здесь, без конструктора.
   // Обязательно переменная должна называться state
@@ -23,8 +24,9 @@ class App extends React.Component {
 
   // В любом методе доступ к переменной состояния осуществляется через this.state
   render () {
+    console.log(AppStyles);
     return (
-      <div className="App">
+      <div className={AppStyles["App-link"]}>
         <button onClick={this.minus}>-</button>
         {this.state.number}
         <button onClick={this.plus}>+</button>
