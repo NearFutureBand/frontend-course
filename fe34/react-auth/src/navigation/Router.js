@@ -1,5 +1,3 @@
-import AuthWithAxios from './AuthWithAxios';
-import Users from './Users';
 import React, { Component } from 'react';
 import {
   BrowserRouter,
@@ -8,12 +6,11 @@ import {
   Link
 } from 'react-router-dom';
 
+import Auth from '../pages/Auth';
+import Users from '../pages/Users';
+import Profile from '../pages/Profile';
 
 class Navigator extends Component {
-
-  state = {
-    currentPage: 'auth'
-  }
 
   render () {
     return (
@@ -25,16 +22,18 @@ class Navigator extends Component {
         
         <Switch>
 
+          <Route path="/users/:index" render={(props) => <Profile {...props}/>}/>
+
           <Route path="/users">
             <Users />
           </Route>
 
           <Route path="/auth">
-            <AuthWithAxios />
+            <Auth />
           </Route>
 
           <Route path="/">
-            <AuthWithAxios />
+            <Auth />
           </Route>
 
         </Switch>
