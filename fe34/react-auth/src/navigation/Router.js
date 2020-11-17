@@ -22,11 +22,9 @@ class Navigator extends Component {
         
         <Switch>
 
-          <Route path="/users/:index" render={(props) => <Profile {...props}/>}/>
+          <Route path="/users/:index/:key" render={(props) => <Profile {...props}/> }/>
 
-          <Route path="/users">
-            <Users />
-          </Route>
+          <Route path="/users" component={Users} />
 
           <Route path="/auth">
             <Auth />

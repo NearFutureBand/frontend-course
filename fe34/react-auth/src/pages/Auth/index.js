@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import './styles.css';
 
 class App extends Component {
@@ -61,6 +63,16 @@ class App extends Component {
         
         <button onClick={this.login}>Login</button>
         {this.state.errors && <span>{this.state.errors}</span>}
+
+        {this.state.user && (
+          <Redirect
+            to={{
+              pathname: "/users",
+              state: { from: "parameter" }
+            }}
+          />
+        )}
+        
       </div>
     );
   }

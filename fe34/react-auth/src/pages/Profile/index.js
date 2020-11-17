@@ -9,12 +9,12 @@ class Profile extends Component {
   }
 
   componentDidMount = async () => {
-    const response = await axios.get("http://localhost:3001/users/6");
+    const response = await axios.get(`http://localhost:3001/users/${this.props.match.params.index}`);
     this.setState({ user: response.data });
   }
 
   render () {
-    console.log(this.props);
+    console.log(this.props.match.params);
     const { user } = this.state;
   
     return (

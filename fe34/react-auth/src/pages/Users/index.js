@@ -14,6 +14,7 @@ class Users extends Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <div className="page page-users">
         <h1>USERS</h1>
