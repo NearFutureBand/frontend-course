@@ -7,9 +7,9 @@ class UserCard extends PureComponent {
 
   render () {
     const classNames = {
-      card: `card ${this.props.small && 'card-small'}`,
-      cardImage: `card-image ${this.props.small && 'card-image-small'}`,
-      cardContent: `card-content ${this.props.small && 'card-content-small'}`,
+      card: `card ${this.props.small ? 'card-small' : ''}`,
+      cardImage: `card-image ${this.props.small ? 'card-image-small' : ''}`,
+      cardContent: `card-content ${this.props.small ? 'card-content-small' : ''}`,
     }
   
     console.log('card render');
@@ -30,12 +30,16 @@ class UserCard extends PureComponent {
 }
 
 UserCard.propTypes = {
-  picture: PropTypes.string,
+  picture: PropTypes.string.isRequired,
   name: PropTypes.shape({
     first: PropTypes.string,
     last: PropTypes.string,
-  }),
+  }).isRequired,
   small: PropTypes.bool,
 };
+
+UserCard.defaultProps = {
+  small: false
+}
 
 export { UserCard };

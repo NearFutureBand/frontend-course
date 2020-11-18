@@ -3,6 +3,8 @@ import {
   Link
 } from 'react-router-dom';
 
+
+import { UserCard } from '../UserCard';
 import './styles.css';
 
 const Navbar = () => {
