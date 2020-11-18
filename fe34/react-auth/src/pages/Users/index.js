@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { UserCard } from '../../components';
+import './styles.css';
+
 class Users extends Component {
 
   state = {
@@ -14,14 +17,14 @@ class Users extends Component {
   }
 
   render () {
-    console.log(this.props);
+    console.log(this.props, this.state);
     return (
       <div className="page page-users">
         <h1>USERS</h1>
         {this.state.users.map((user) => {
           return (
             <Link to={`/users/${user.index}`} key={user._id}>
-              <span >{`${user.name.first} ${user.name.last}`}</span>
+              <UserCard picture={user.picture} name={user.name} />
             </Link>
           );
         })}

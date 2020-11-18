@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+
+import { UserCard } from '../../components';
 import './styles.css';
 
 class Profile extends Component {
@@ -14,13 +16,17 @@ class Profile extends Component {
   }
 
   render () {
-    console.log(this.props.match.params);
     const { user } = this.state;
   
     return (
       <div className="page page-profile">
-        <span>{user?.index}</span>
-        <span>{user?.about}</span>
+        <h1>PROFILE</h1>
+        { user && (
+          <UserCard name={user.name} picture={user.picture} />
+        )}
+        
+        <span>index: {user?.index}</span>
+        <p>{user?.about}</p>
       </div>
     );
   }

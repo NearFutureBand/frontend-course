@@ -1,0 +1,9 @@
+nav.navbar {
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 3rem;
+  box-shadow: 1px 1px 10px rgba(0,0,0,.4);
+  position: absolute;
+  top: 0;
+}

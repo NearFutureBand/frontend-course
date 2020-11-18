@@ -41,10 +41,9 @@ class App extends Component {
   }
 
   render () {
-    console.log('render' )
     return (
       <div className="page">
-        <h1>AUTHENTICATIOn</h1>
+        <h1>AUTHENTICATION</h1>
         {this.state.user && (
           <span>Hello {this.state.user.name.first}</span>
         )}
@@ -67,8 +66,7 @@ class App extends Component {
         {this.state.user && (
           <Redirect
             to={{
-              pathname: "/users",
-              state: { from: "parameter" }
+              pathname: "/users"
             }}
           />
         )}

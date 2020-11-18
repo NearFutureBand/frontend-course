@@ -7,19 +7,38 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+div, nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .page {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.page-users {
-  flex-direction: column;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input, button {
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+button:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }
