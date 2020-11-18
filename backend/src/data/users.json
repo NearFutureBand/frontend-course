@@ -5,7 +5,7 @@
     "guid": "e6357a74-e76c-4641-ae3a-947e42bd75b3",
     "isActive": false,
     "balance": "$2,342.30",
-    "picture": "https://api.adorable.io/avatars/111.png",
+    "picture": "https://avatars.dicebear.com/api/human/a.svg",
     "age": 40,
     "eyeColor": "blue",
     "name": {
@@ -50,7 +50,7 @@
     "guid": "45751856-058e-491f-a33b-e9eb1df04f64",
     "isActive": false,
     "balance": "$1,935.67",
-    "picture": "https://api.adorable.io/avatars/112.png",
+    "picture": "https://avatars.dicebear.com/api/human/b.svg",
     "age": 23,
     "eyeColor": "blue",
     "name": {
@@ -84,24 +84,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Curtis",
-          "last": "Greene"
-        },
-        "picture": "https://api.adorable.io/avatars/111.png",
-        "index": 0
-      },
-      {
-        "name": {
-          "first": "Barr",
-          "last": "Copeland"
-        },
-        "picture": "https://api.adorable.io/avatars/113.png",
-        "index": 2
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Nikki! You have 8 unread messages.",
     "favoriteFruit": "strawberry",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -112,7 +95,7 @@
     "guid": "b4820655-1036-46e7-994c-929291a2ff6b",
     "isActive": true,
     "balance": "$2,312.43",
-    "picture": "https://api.adorable.io/avatars/113.png",
+    "picture": "https://avatars.dicebear.com/api/human/c.svg",
     "age": 39,
     "eyeColor": "green",
     "name": {
@@ -146,32 +129,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Curtis",
-          "last": "Greene"
-        },
-        "picture": "https://api.adorable.io/avatars/111.png",
-        "index": 0
-      },
-      {
-        "name": {
-          "first": "Nikki",
-          "last": "Lowe"
-        },
-        "picture": "https://api.adorable.io/avatars/112.png",
-        "index": 1
-      },
-      {
-        "name": {
-          "first": "Leta",
-          "last": "Lee"
-        },
-        "picture": "https://api.adorable.io/avatars/115.png",
-        "index": 4
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Barr! You have 10 unread messages.",
     "favoriteFruit": "strawberry",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -182,7 +140,7 @@
     "guid": "708a88c9-44b9-4e36-8ea9-98986e7431ca",
     "isActive": true,
     "balance": "$2,831.95",
-    "picture": "https://api.adorable.io/avatars/114.png",
+    "picture": "https://avatars.dicebear.com/api/human/n.svg",
     "age": 29,
     "eyeColor": "blue",
     "name": {
@@ -227,7 +185,7 @@
     "guid": "f0d815ad-9a81-4670-ad30-4a17baf46f02",
     "isActive": true,
     "balance": "$2,653.54",
-    "picture": "https://api.adorable.io/avatars/115.png",
+    "picture": "https://avatars.dicebear.com/api/human/g.svg",
     "age": 21,
     "eyeColor": "blue",
     "name": {
@@ -261,16 +219,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Barr",
-          "last": "Copeland"
-        },
-        "picture": "https://api.adorable.io/avatars/113.png",
-        "index": 2
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Leta! You have 7 unread messages.",
     "favoriteFruit": "strawberry",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -281,7 +230,7 @@
     "guid": "44c61096-581c-4a3e-9409-febb0606d5c4",
     "isActive": false,
     "balance": "$2,238.54",
-    "picture": "https://api.adorable.io/avatars/118.png",
+    "picture": "https://avatars.dicebear.com/api/human/e.svg",
     "age": 34,
     "eyeColor": "green",
     "name": {
@@ -315,32 +264,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Mary",
-          "last": "Compton"
-        },
-        "picture": "https://api.adorable.io/avatars/119.png",
-        "index": 6
-      },
-      {
-        "name": {
-          "first": "Perez",
-          "last": "Valencia"
-        },
-        "picture": "https://api.adorable.io/avatars/121.png",
-        "index": 8
-      },
-      {
-        "name": {
-          "first": "Curtis",
-          "last": "Greene"
-        },
-        "picture": "https://api.adorable.io/avatars/111.png",
-        "index": 0
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Henry! You have 10 unread messages.",
     "favoriteFruit": "banana",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -351,7 +275,7 @@
     "guid": "b8b62a61-f628-40ae-8b45-f386adebb8cf",
     "isActive": false,
     "balance": "$3,885.49",
-    "picture": "https://api.adorable.io/avatars/119.png",
+    "picture": "https://avatars.dicebear.com/api/human/2.svg",
     "age": 35,
     "eyeColor": "green",
     "name": {
@@ -385,16 +309,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Henry",
-          "last": "Stewart"
-        },
-        "picture": "https://api.adorable.io/avatars/118.png",
-        "index": 5
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Mary! You have 7 unread messages.",
     "favoriteFruit": "banana",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -405,7 +320,7 @@
     "guid": "fa8a421b-10d2-4ce3-94df-9489dcf0b8c7",
     "isActive": false,
     "balance": "$3,541.53",
-    "picture": "https://api.adorable.io/avatars/120.png",
+    "picture": "https://avatars.dicebear.com/api/human/p.svg",
     "age": 20,
     "eyeColor": "brown",
     "name": {
@@ -439,16 +354,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Perez",
-          "last": "Valencia"
-        },
-        "picture": "https://api.adorable.io/avatars/121.png",
-        "index": 8
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Brandi! You have 8 unread messages.",
     "favoriteFruit": "apple",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
@@ -459,7 +365,7 @@
     "guid": "5cb0f858-ea6f-40e6-a59e-f2d78adfafc0",
     "isActive": false,
     "balance": "$3,392.54",
-    "picture": "https://api.adorable.io/avatars/121.png",
+    "picture": "https://avatars.dicebear.com/api/human/w.svg",
     "age": 30,
     "eyeColor": "blue",
     "name": {
@@ -493,24 +399,7 @@
       8,
       9
     ],
-    "friends": [
-      {
-        "name": {
-          "first": "Brandi",
-          "last": "Hawkins"
-        },
-        "picture": "https://api.adorable.io/avatars/120.png",
-        "index": 7
-      },
-      {
-        "name": {
-          "first": "Henry",
-          "last": "Stewart"
-        },
-        "picture": "https://api.adorable.io/avatars/118.png",
-        "index": 5
-      }
-    ],
+    "friends": [],
     "greeting": "Hello, Perez! You have 9 unread messages.",
     "favoriteFruit": "strawberry",
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
