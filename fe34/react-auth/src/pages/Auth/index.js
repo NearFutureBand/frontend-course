@@ -27,10 +27,11 @@ class App extends Component {
 
     try {
       const result = await axios.post('http://localhost:3001/auth/sign-in', {
-        phone: phone,
+        phone,
         password
       });
       this.setState({ user: result.data });
+      this.props.setUserData(result.data);
     } catch (err) {
       this.setState({ errors: err.response.data });
     }

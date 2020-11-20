@@ -7,30 +7,34 @@ import {
 } from 'react-router-dom';
 
 import { Navbar } from '../components';
-
-import Auth from '../pages/Auth';
-import Users from '../pages/Users';
-import Profile from '../pages/Profile';
+import { Users, Profile, Auth } from '../pages';
 
 class Navigator extends Component {
+
+  state = {
+    userData: null
+  }
+
+  setUserData = (userData) => {
+    console.log(userData);
+    this.setState({ userData });
+  }
 
   render () {
     return (
       <BrowserRouter>
-        <Navbar />
+        <Navbar userData={this.state.userData} /> 
         
         <Switch>
-
-          <Route path="/users/:index" component={Profile} />
+          <Route
+            path="/users/:index"
+            component={Profile}
+          />
 
           <Route path="/users" component={Users} />
 
-          <Route path="/auth">
-            <Auth />
-          </Route>
-
           <Route path="/">
-            <Auth />
+            <Auth setUserData={this.setUserData} />
           </Route>
 
         </Switch>

@@ -7,11 +7,11 @@ import {
 import { UserCard } from '../UserCard';
 import './styles.css';
 
-const Navbar = () => {
+const Navbar = ({ userData }) => {
   return (
     <nav className="navbar">
       <Link to="/users">Users</Link>
-      <Link to="/auth">Auth</Link>
+      { userData ? <UserCard picture={userData.picture} name={userData.name} small={true} /> : <Link to="/auth">Auth</Link> }
     </nav>
   )
 }
