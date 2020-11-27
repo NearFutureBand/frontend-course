@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { comment, connect } from 'react-redux';
 import {
   BrowserRouter,
   Switch,
@@ -8,11 +9,19 @@ import {
 
 import { Navbar } from '../components';
 import { Users, Profile, Auth } from '../pages';
+import { login } from '../actions';
 
 class Navigator extends Component {
 
   state = {
     userData: null
+  }
+
+  componentDidMount = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.props.login({ token });
+    }
   }
 
   setUserData = (userData) => {
@@ -43,4 +52,4 @@ class Navigator extends Component {
   }
 }
 
-export default Navigator;
+export default connect(null, { login } )(Navigator);

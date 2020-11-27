@@ -21,6 +21,7 @@ import reducer from './reducer';
  * стор кидаем в переменную store
  */
 const store = createStore(reducer);
+console.log(store);
 
 /**
  * 2) Provider оборачивает главный компонент и ожидает проп store
