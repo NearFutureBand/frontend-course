@@ -16,7 +16,6 @@ const initialState = {
  */
 const reducer = (state = initialState, action) => {
   console.log(state, action);
-  
   /**
    * 3) Внутри редьюсера описываются случаи какой стейт возвращать
    * в зависимости от типа переданного сюда экшена
