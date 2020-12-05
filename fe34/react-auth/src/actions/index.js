@@ -99,7 +99,7 @@ export const login = ({ phone, password, token }) => {
     } catch (err) {
       // 4) Запрос произошел с ошибкой, вызываем подходящий экшен и передаем
       // с помощью него в редакс текст ошибки
-      dispatch(loginFailure(err.response.data));
+      dispatch(loginFailure(err?.response?.data));
     }
   }
 }
