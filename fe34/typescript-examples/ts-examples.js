@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 // ====================
 // Простые типы
 // ====================
@@ -9,26 +22,37 @@ typeof greeting;
 // ====================
 // Массивы и объекты
 // ====================
+// Обычное описание типа массива
 var array1 = [1, 2, 3];
+// Обычное описание типа массива - равнозначно предыдущему
 var array2 = [3, 4, 5];
+// Тип tuple на случай, если массив будет содержать разные типы
 var tuple = [1, 'Name'];
+// Обычное описание объекта - перечисляются все свойства и их типы.
+// Порядок свойств можно не соблюдать
 var object1 = {
     a: 1,
     b: 'str',
     c: true
 };
+// Тип перечисление (enum). Используется для некоторых наборов констант,
+// объединенных общим смыслом. Также используется вместо того чтобы кодировать
+// какие-то понятия/сущности с помощью чисел или сокращений - потому что
+// позволяет работать с человекочитаемыми названиями (повышают семантику кода)
 var Colors;
 (function (Colors) {
     Colors[Colors["Red"] = 0] = "Red";
     Colors[Colors["Green"] = 1] = "Green";
     Colors[Colors["Blue"] = 2] = "Blue";
 })(Colors || (Colors = {}));
+// Пример enum на практике - типы для экшенов в редаксе
 var actionTypes;
 (function (actionTypes) {
     actionTypes["PLUS"] = "PLUS";
     actionTypes["GET_USERS"] = "GET_USERS";
     actionTypes["LOGIN_START"] = "LOGIN_START";
 })(actionTypes || (actionTypes = {}));
+// Пример создания объекта типа TUser
 var user1 = {
     id: 1,
     phone: '+375291112233',
@@ -40,6 +64,8 @@ var user1 = {
     },
     avatar: 'https://adsadadasdas/asd/ad.png'
 };
+// Пример создания еще одного объекта типа TUser - здесь поля
+// avatar уже нет, но все по-прежнему работает
 var user2 = {
     id: 2,
     phone: '+375291112233',
@@ -50,6 +76,7 @@ var user2 = {
         last: 'Bezos',
     },
 };
+// Пример создания такого объекта
 var admin1 = {
     id: 3,
     phone: '+375291112233',
@@ -76,13 +103,14 @@ function f2(a, b) {
 var f3 = function (name) {
     console.log("Hello " + name + "!");
 };
-// Параметры по умолчанию
+// Параметр по умолчанию
 var f5 = function (a) {
     if (a === void 0) { a = 5; }
     var result = "I'm " + 5;
     console.log(result);
 };
-//  необязательные параметры
+// Необязательный параметр. Необязательные параметры должна
+// идти после обязательных
 var f6 = function (a, b) {
     console.log(a, b);
 };
@@ -93,9 +121,17 @@ var f7 = function (a, b) {
 var f4 = function () {
     throw new Error("everything's broken");
 };
+// Все, пока хватит.
 // ====================
 // Классы и наследование
 // ====================
+/**
+ * 1) В классе нужно объявить типы полей (свойств).
+ * 2) Модификаторы доступа public, private, protected
+ * - public свойства или методы видны везде - внутри класса, у экземпляра класса и в унаследованных классах (доступ везде)
+ * - private свойства или методы видны только внутри класса, к ним нельзя обратиться из экземпляра или унаследованного класса (доступ только в оригинальном классе)
+ * - protected свойства или методы видны внутри класса и у унаследованных классов, но из экземпляра к ним доступа нет (внутриклассовый доступ)
+ */
 var Human = /** @class */ (function () {
     function Human(age, name) {
         this._age = age;
@@ -116,7 +152,7 @@ var Human = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    // инкапсуляция
+    // Инкапсуляция
     Human.prototype.isAgePositive = function (age) {
         return age > 0;
     };
@@ -128,66 +164,62 @@ human1.age = -1;
 console.log(human1.age);
 human1.age = 21;
 console.log(human1.age);
-// наследование
-/*class Programmer extends Human {
-  protected level: levelsOfProgrammers;
-  static numberOfprogrammers: number;
-
-  constructor(age: number, name: string, level: levelsOfProgrammers) {
-    super(age, name);
-    this.level = level;
-    Programmer.staticMethod();
-  }
-
-  // полиморфизм
-  public hello():void {
-    super.hello();
-    console.log('Im a programmer');
-  }
-
-  static staticMethod():void {
-    console.log('static method');
-    this.numberOfprogrammers += 1;
-  }
-}
-
-class TeamLead extends Programmer {
-  constructor(age, name, level, project) {
-    super(age, name, level);
-    this.project = project;
-  }
-
-  hello() {
-    super.hello();
-    console.log(`And I'm the Team Lead!`);
-  }
-}
-
-const lead1 = new TeamLead(22, 'Alex', 'Senior', 'Proj1');
-console.log(lead1);
-lead1.hello();
-
 human1.hello();
-
-
-// instance экземпляр
-/*const pr1 = new Programmer(25, 'Phillip', 'middle');
-console.log(Programmer.numberOfProgrammers);
-const pr2 = new Programmer(25, 'Phillip', 'middle');
-console.log(Programmer.numberOfProgrammers);*/
-//console.log(pr1.age, pr1.name, pr1.level, pr1.hello());
-/*class Teacher extends Human {
-  constructor(age, name, subject, level) {
-    super(age, name);
-    this.subject = subject;
-  }
-
-  hello() {
-    super.hello();
-    console.log('Im a teacher of ' + this.subject);
-  }
-}
-
-
-const tr1 = new Teacher(30, 'G', 'math');
-//tr1.hello();*/
+// Наследование
+/**
+ * Статическое свойство/метод - одно свойство/метод на весь класс. Доступ не через имя экземпляра, а через имя класса
+ * Можно вызывать/получать статические методы/свойства без создания экземпляра класса
+ * Статические свойства и методы также имеют модификатор доступа
+ */
+var Programmer = /** @class */ (function (_super) {
+    __extends(Programmer, _super);
+    function Programmer(age, name, level) {
+        var _this = _super.call(this, age, name) || this;
+        _this.level = level;
+        Programmer.staticMethod();
+        return _this;
+    }
+    // Полиморфизм
+    Programmer.prototype.hello = function () {
+        _super.prototype.hello.call(this);
+        console.log('Im a programmer');
+    };
+    Programmer.staticMethod = function () {
+        console.log('One more programmer has born');
+        this.numberOfprogrammers += 1;
+    };
+    Programmer.numberOfprogrammers = 0;
+    return Programmer;
+}(Human));
+var prog1 = new Programmer(30, 'John', 'middle');
+console.log(Programmer.numberOfprogrammers);
+var prog2 = new Programmer(30, 'Kate', 'junior');
+console.log(Programmer.numberOfprogrammers);
+prog2.hello();
+// Дальнейшее наследование
+var TeamLead = /** @class */ (function (_super) {
+    __extends(TeamLead, _super);
+    function TeamLead(age, name, level, project) {
+        var _this = _super.call(this, age, name, level) || this;
+        _this.project = project;
+        return _this;
+    }
+    TeamLead.prototype.hello = function () {
+        _super.prototype.hello.call(this);
+        console.log("And I'm the Team Lead! Currently I'm working on: ");
+        this.showProject();
+    };
+    TeamLead.prototype.showProject = function () {
+        console.log(this.project);
+    };
+    return TeamLead;
+}(Programmer));
+var project1 = 'Uber';
+var project2 = {
+    startDate: new Date(),
+    endDate: new Date(),
+    name: 'Yandex Maps'
+};
+var project3 = [100, 26, 0];
+var tl1 = new TeamLead(100, 'Fedor', 'senior', project3);
+tl1.hello();

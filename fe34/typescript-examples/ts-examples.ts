@@ -259,11 +259,17 @@ const f4 = (): never => {
 
 
 
-// Все, пока хватит.
 // ====================
 // Классы и наследование
 // ====================
 
+/**
+ * 1) В классе нужно объявить типы полей (свойств).
+ * 2) Модификаторы доступа public, private, protected
+ * - public свойства или методы видны везде - внутри класса, у экземпляра класса и в унаследованных классах (доступ везде)
+ * - private свойства или методы видны только внутри класса, к ним нельзя обратиться из экземпляра или унаследованного класса (доступ только в оригинальном классе)
+ * - protected свойства или методы видны внутри класса и у унаследованных классов, но из экземпляра к ним доступа нет (внутриклассовый доступ)
+ */
 class Human {
   public name: string;
   private _age: number;
@@ -286,7 +292,7 @@ class Human {
     return this._age;
   }
 
-  // инкапсуляция
+  // Инкапсуляция
   private isAgePositive(age: number): boolean {
     return age > 0;
   }
@@ -298,72 +304,135 @@ human1.age = -1;
 console.log(human1.age);
 human1.age = 21;
 console.log(human1.age);
+human1.hello();
 
+type TLevelsOfProgrammers = 'junior' | 'middle' | 'senior';
 
-type levelsOfProgrammers = 'junior' | 'middle' | 'senior';
-
-// наследование
+// Наследование
+/**
+ * Статическое свойство/метод - одно свойство/метод на весь класс. Доступ не через имя экземпляра, а через имя класса
+ * Можно вызывать/получать статические методы/свойства без создания экземпляра класса
+ * Статические свойства и методы также имеют модификатор доступа
+ */
 class Programmer extends Human {
-  protected level: levelsOfProgrammers;
-  static numberOfprogrammers: number;
+  protected level: TLevelsOfProgrammers;
+  static numberOfprogrammers: number = 0;
 
-  constructor(age: number, name: string, level: levelsOfProgrammers) {
+  constructor(age: number, name: string, level: TLevelsOfProgrammers) {
     super(age, name);
     this.level = level;
     Programmer.staticMethod();
   }
 
-  // полиморфизм
+  // Полиморфизм
   public hello():void {
     super.hello();
     console.log('Im a programmer');
   }
 
   static staticMethod():void {
-    console.log('static method');
+    console.log('One more programmer has born');
     this.numberOfprogrammers += 1;
   }
 }
 
 /*
-class TeamLead extends Programmer {
-  constructor(age, name, level, project) {
+const prog1 = new Programmer(30, 'John', 'middle');
+console.log(Programmer.numberOfprogrammers);
+const prog2 = new Programmer(30, 'Kate', 'junior');
+console.log(Programmer.numberOfprogrammers);
+prog2.hello();
+*/
+
+
+// Дальнейшее наследование
+class TeamLead<TProject> extends Programmer {
+  public project: TProject;
+
+  constructor(age: number, name: string, level: TLevelsOfProgrammers, project: TProject) {
     super(age, name, level);
     this.project = project;
   }
 
+  // Снова полиморфизм
   hello() {
     super.hello();
-    console.log(`And I'm the Team Lead!`);
+    console.log(`And I'm the Team Lead! Currently I'm working on: `);
+    this.showProject();
+  }
+
+  public showProject () {
+    console.log(this.project);
   }
 }
 
-const lead1 = new TeamLead(22, 'Alex', 'Senior', 'Proj1');
-console.log(lead1);
-lead1.hello();
+const project1 = 'Uber';
+const project2 = {
+  startDate: new Date(),
+  endDate: new Date(),
+  name: 'Yandex Maps'
+};
+const project3 = [100,26,0];
 
-human1.hello();
+//const tl1 = new TeamLead(100, 'Fedor', 'senior');
+//tl1.hello();
 
 
-// instance экземпляр
-/*const pr1 = new Programmer(25, 'Phillip', 'middle');
-console.log(Programmer.numberOfProgrammers);
-const pr2 = new Programmer(25, 'Phillip', 'middle');
-console.log(Programmer.numberOfProgrammers);*/
-//console.log(pr1.age, pr1.name, pr1.level, pr1.hello());
 
-/*class Teacher extends Human {
-  constructor(age, name, subject, level) {
-    super(age, name);
-    this.subject = subject;
-  }
 
-  hello() {
-    super.hello();
-    console.log('Im a teacher of ' + this.subject);
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ====================
+// Интерфейсы
+// ====================
+
+/*
+
+interface IProject {};
+interface IWebsite extends IProject {};
+interface IDatabase extends IProject {};
+
+/*
+interface IHuman {
+  name: string;
+  age: number;
 }
 
+interface IProgrammer extends IHuman {
+  level: TLevelsOfProgrammers;
+  certificates: object[];
+  knownTechnologies: string[];
+}
 
-const tr1 = new Teacher(30, 'G', 'math');
-//tr1.hello();*/
+interface Manager extends IHuman {
+  history: string[];
+}
+
+interface IFrontendDeveloper extends IProgrammer {
+  createWebsite: () => IWebsite;
+}
+
+interface IBackendDeveloper extends IProgrammer {
+  createDatabase: () => IDatabase;
+}
+
+interface IFullStackDeveloper extends IFrontendDeveloper, IBackendDeveloper {
+
+}
+
+*/
