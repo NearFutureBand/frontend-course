@@ -121,7 +121,6 @@ var f7 = function (a, b) {
 var f4 = function () {
     throw new Error("everything's broken");
 };
-// Все, пока хватит.
 // ====================
 // Классы и наследование
 // ====================
@@ -158,13 +157,6 @@ var Human = /** @class */ (function () {
     };
     return Human;
 }());
-var human1 = new Human(20, 'Dave');
-console.log(human1.age);
-human1.age = -1;
-console.log(human1.age);
-human1.age = 21;
-console.log(human1.age);
-human1.hello();
 // Наследование
 /**
  * Статическое свойство/метод - одно свойство/метод на весь класс. Доступ не через имя экземпляра, а через имя класса
@@ -191,11 +183,13 @@ var Programmer = /** @class */ (function (_super) {
     Programmer.numberOfprogrammers = 0;
     return Programmer;
 }(Human));
-var prog1 = new Programmer(30, 'John', 'middle');
+/*
+const prog1 = new Programmer(30, 'John', 'middle');
 console.log(Programmer.numberOfprogrammers);
-var prog2 = new Programmer(30, 'Kate', 'junior');
+const prog2 = new Programmer(30, 'Kate', 'junior');
 console.log(Programmer.numberOfprogrammers);
 prog2.hello();
+*/
 // Дальнейшее наследование
 var TeamLead = /** @class */ (function (_super) {
     __extends(TeamLead, _super);
@@ -204,6 +198,7 @@ var TeamLead = /** @class */ (function (_super) {
         _this.project = project;
         return _this;
     }
+    // Снова полиморфизм
     TeamLead.prototype.hello = function () {
         _super.prototype.hello.call(this);
         console.log("And I'm the Team Lead! Currently I'm working on: ");
@@ -221,5 +216,50 @@ var project2 = {
     name: 'Yandex Maps'
 };
 var project3 = [100, 26, 0];
-var tl1 = new TeamLead(100, 'Fedor', 'senior', project3);
-tl1.hello();
+var f8 = function (a) {
+    console.log(typeof a);
+    return a;
+};
+var f9 = function (a) {
+    // любой код 
+    return a;
+};
+console.log(f8(5), f9(['a', 'b', 'c']));
+// ====================
+// Интерфейсы
+// ====================
+/*
+
+interface IProject {};
+interface IWebsite extends IProject {};
+interface IDatabase extends IProject {};
+
+/*
+interface IHuman {
+  name: string;
+  age: number;
+}
+
+interface IProgrammer extends IHuman {
+  level: TLevelsOfProgrammers;
+  certificates: object[];
+  knownTechnologies: string[];
+}
+
+interface Manager extends IHuman {
+  history: string[];
+}
+
+interface IFrontendDeveloper extends IProgrammer {
+  createWebsite: () => IWebsite;
+}
+
+interface IBackendDeveloper extends IProgrammer {
+  createDatabase: () => IDatabase;
+}
+
+interface IFullStackDeveloper extends IFrontendDeveloper, IBackendDeveloper {
+
+}
+
+*/ 

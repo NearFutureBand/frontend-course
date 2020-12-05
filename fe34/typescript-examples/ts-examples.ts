@@ -298,6 +298,7 @@ class Human {
   }
 }
 
+/*
 const human1 = new Human(20, 'Dave');
 console.log(human1.age);
 human1.age = -1;
@@ -305,6 +306,8 @@ console.log(human1.age);
 human1.age = 21;
 console.log(human1.age);
 human1.hello();
+
+*/
 
 type TLevelsOfProgrammers = 'junior' | 'middle' | 'senior';
 
@@ -380,6 +383,41 @@ const project3 = [100,26,0];
 
 
 
+// Generics
+
+type TGenericFunction<T> = (a: T) => T;
+const f8: TGenericFunction<number> = (a) => {
+  console.log(typeof a);
+  return a;
+}
+
+const f9: TGenericFunction<string[]> = (a) => {
+  // любой код 
+  return a;
+}
+
+// Описание типа функции без type и с generic
+// Указывать тип Т нужно в момент вызова
+const f10: <T>(a: T) => T = (a) => {
+  return a;
+}
+
+//console.log(f8(5), f9(['a', 'b', 'c']));
+//console.log(f10<number>(7));
+
+
+// Gneric тип для объекта
+type TGenericObject<T> = {
+  age: T
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -401,13 +439,12 @@ const project3 = [100,26,0];
 // Интерфейсы
 // ====================
 
-/*
 
+/*
 interface IProject {};
 interface IWebsite extends IProject {};
 interface IDatabase extends IProject {};
 
-/*
 interface IHuman {
   name: string;
   age: number;
@@ -434,5 +471,4 @@ interface IBackendDeveloper extends IProgrammer {
 interface IFullStackDeveloper extends IFrontendDeveloper, IBackendDeveloper {
 
 }
-
 */
