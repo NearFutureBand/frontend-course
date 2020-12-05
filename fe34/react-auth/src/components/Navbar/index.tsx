@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Link
@@ -12,7 +12,7 @@ import './styles.css';
  * в редаксе. Здесь они используются чтобы после успешного логина скрыть кнопку
  * Auth из навбара и показать карточку с аватаркой аутентифицированного юзера
  */
-const Navbar = () => {
+const Navbar: FC = () => {
 
   // 2) useSeelector - если нужен доступ к переменной из редакса
   // внутри useSeleector указывается функция с путем к свойству в объекте стейта редакса.

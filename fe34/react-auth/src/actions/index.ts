@@ -1,4 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+
+import {
+  actionTypes, 
+  TPasswordChangeActionCreator, 
+  TPhoneChangeActionCreator, 
+  TLoginStartAC, 
+  TLoginSuccessAC, 
+  TLoginFailureAC
+} from '../types/actions';
+
+import { IUser } from '../types/interfaces';
 
 /**
  * 1) Объект-перечисление для хранения типов экшенов. Так мы инкапсулируем строковые
@@ -9,14 +20,12 @@ import axios from 'axios';
  * использовать где угодно. Как минимум эти вещи нам нужны в двух местах - в папке с 
  * экшенами и в папке с редьюсерами
  */
-export const actionTypes = {
-  CHANGE_PASSWORD: 'CHANGE_PASSWORD',
-  CHANGE_PHONE: 'CHANGE_PHONE',
-  SET_USER_DATA: 'SET_USER_DATA',
-  LOGIN_START: 'LOGIN_START',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'LOGIN_FAILURE'
-}
+
+type TLoginParams = ({
+  phone?: string,
+  password?: string,
+  token?: string,
+});
 
 /**
  * 2) action creator для экшена изменения пароля. Action - это объект, а
@@ -25,13 +34,13 @@ export const actionTypes = {
  * именно ActionCreator и называют их просто экшенами для сокращения
  * @param {string} value 
  */
-export const passwordChangeActionCreator = (value) => {
+export const passwordChangeActionCreator: TPasswordChangeActionCreator = (value) => {
   return {
     type: actionTypes.CHANGE_PASSWORD,
     payload: value
   }
 }
-export const phoneChangeAction = (value) => ({
+export const phoneChangeAction: TPhoneChangeActionCreator = (value) => ({
   type: actionTypes.CHANGE_PHONE,
   payload: value
 });
@@ -41,7 +50,7 @@ export const phoneChangeAction = (value) => ({
  * будем устанавливать переменную loading в редаксе в true, чтобы потом
  * в компоненте отрисовывать лоадер по этому условию
  */
-const loginStart = () => ({
+const loginStart: TLoginStartAC = () => ({
   type: actionTypes.LOGIN_START,
 });
 
@@ -49,7 +58,7 @@ const loginStart = () => ({
  * 4) В случае успеха передадим объект с данными пользователя в редакс
  * @param {object} userData 
  */
-const loginSuccess = (userData) => ({
+const loginSuccess: TLoginSuccessAC = (userData) => ({
   type: actionTypes.LOGIN_SUCCESS,
   payload: userData
 });
@@ -58,7 +67,7 @@ const loginSuccess = (userData) => ({
  * 5) В случае провала запроса передадим строку с текстом ошибки в редакс
  * @param {string} error 
  */
-const loginFailure = (error) => ({
+const loginFailure: TLoginFailureAC = (error) => ({
   type: actionTypes.LOGIN_FAILURE,
   payload: error,
 });
@@ -71,17 +80,17 @@ const loginFailure = (error) => ({
  * работу. Какую работу? В нашем случае, в случае с redux-thunk, middleware будет позволять
  * такого рода функциям как наш экшен login игнорировать правило что actionCreator обязан
  * возвращать объект экшена. Вместо этого теперь у нас есть возможность вернуть функцию,
- * внутри которой мы уже решим когда и какой экшен нам нужно вызвать 
+ * внутри которой мы уже решим когда и какой экшен нам нужно вызвать
  * @param {object: {phone?: string, password?: string, token?: string}} param0 
  */
-export const login = ({ phone, password, token }) => {
+export const login = ({ phone, password, token }: TLoginParams) => {
   // возвращаемая функция принимает dispatch и может быть асинхронной
   return async (dispatch) => {
     try {
       // 1) Запрос начался, выпускаем соответствующий экшен чтобы показать редаксу что мы начали
       dispatch(loginStart());
 
-      const response = await axios.post('http://localhost:3001/auth/sign-in', {
+      const response: AxiosResponse<IUser> = await axios.post('http://localhost:3001/auth/sign-in', {
         phone,
         password,
         token

@@ -1,4 +1,8 @@
-import { actionTypes } from '../actions';
+
+import { actionTypes, TAuthActions } from '../types/actions';
+import { IAuthState } from '../types/interfaces';
+
+type TAuthReducer = (state: IAuthState, action: TAuthActions) => IAuthState;
 
 /**
  * 1) Здесь начальное состояние для страницы Auth. Все переменные
@@ -6,7 +10,7 @@ import { actionTypes } from '../actions';
  * зделать чтобы компонент работал с редаксом - это создать состояние в редаксе
  * для этого компонента
  */
-const initialState = {
+const initialState: IAuthState = {
   phone: '', // значение инпута для ввода номера телефона
   password: '', // значение инпута для ввода пароля
   user: null, // переменная для хранения данных залогиненного пользователя
@@ -14,7 +18,7 @@ const initialState = {
   loading: false, // переменная для отображения анимации загрузки при выполнении запросов
 };
 
-const reducer = (state = initialState, action) => {
+const reducer: TAuthReducer = (state = initialState, action) => {
   
   switch (action.type) {
 
