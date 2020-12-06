@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { IAuthState, IStore, IUsersState } from '../types/interfaces';
-
 // 1) Импортируем все редьюсеры, которые у нас есть
 import AuthReducer from './authReducer';
 import UsersRedcuer from './usersReducer';
@@ -13,9 +11,12 @@ import UsersRedcuer from './usersReducer';
  * combineReducers принимает объект в котором свойства это
  * названия для модулей стейта, а значения - редьюсеры
 */
-export default combineReducers({
+const rootReducer = combineReducers({
   auth: AuthReducer,
   users: UsersRedcuer,
 });
 
+export default rootReducer;
+
+export type TRootState = ReturnType<typeof rootReducer>;
 

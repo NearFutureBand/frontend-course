@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Link
@@ -6,6 +6,7 @@ import {
 
 import { UserCard } from '../UserCard';
 import './styles.css';
+import { IStore } from '../../types/interfaces';
 
 /**
  * 1) Обычный функциональный компонент, которому нужен доступ к данным пользователя
@@ -19,7 +20,7 @@ const Navbar: FC = () => {
   // Так как используется несколько редьюсеров, то нужно не забывать про имя модуля auth,
   // которое было нами придумано в функции combineReducers. Дальше идет свойство user - оно
   // как и раньше берется из initialState
-  const userData = useSelector( state => state.auth.user);
+  const userData = useSelector( (state: IStore) => state.auth.user);
 
   return (
     <nav className="navbar">

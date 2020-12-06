@@ -1,4 +1,5 @@
 export interface IUserShortInfo {
+  _id: string;
   index: number;
   picture: string;
   name: {
@@ -8,7 +9,6 @@ export interface IUserShortInfo {
 }
 
 export interface IUser extends IUserShortInfo {
-  _id: string;
   guid: string;
   isActive: boolean;
   balance: string;
@@ -33,7 +33,7 @@ export interface IUser extends IUserShortInfo {
 export interface IAuthState {
   phone: string;
   password: string;
-  user: object | null;
+  user: IUser | null;
   errors: string;
   loading: boolean;
 }

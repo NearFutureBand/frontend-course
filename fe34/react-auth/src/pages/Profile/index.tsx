@@ -1,17 +1,35 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { UserCard } from '../../components';
 import './styles.css';
+import { IUser } from '../../types/interfaces';
 
-class Profile extends Component {
 
-  state = {
-    user: null,
+interface IState {
+  user: IUser | null;
+}
+
+interface RouteParams {
+  index: string;
+}
+
+interface IProps extends RouteComponentProps<RouteParams> {};
+
+class Profile extends Component<IProps, IState> {
+
+  constructor (props: IProps) {
+    super(props);
+
+    this.state = {
+      user: null,
+    }
   }
 
   componentDidMount = async () => {
-    const response = await axios.get(`http://localhost:3001/users/${this.props.match.params.index}`);
+    const userIndex = this.props.match.params.index;
+    const response = await axios.get(`http://localhost:3001/users/${userIndex}`);
     this.setState({ user: response.data });
   }
 

@@ -85,7 +85,7 @@ const loginFailure: TLoginFailureAC = (error) => ({
  */
 export const login = ({ phone, password, token }: TLoginParams) => {
   // возвращаемая функция принимает dispatch и может быть асинхронной
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     try {
       // 1) Запрос начался, выпускаем соответствующий экшен чтобы показать редаксу что мы начали
       dispatch(loginStart());

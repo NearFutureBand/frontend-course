@@ -1,9 +1,6 @@
 
 import { actionTypes, TAuthActions } from '../types/actions';
 import { IAuthState } from '../types/interfaces';
-
-type TAuthReducer = (state: IAuthState, action: TAuthActions) => IAuthState;
-
 /**
  * 1) Здесь начальное состояние для страницы Auth. Все переменные
  * которые раньше лежали в локальном стейте Auth переехали сюда. Первое что нужно
@@ -17,6 +14,8 @@ const initialState: IAuthState = {
   errors: '', // переменная для вывода ошибок при аутентификации
   loading: false, // переменная для отображения анимации загрузки при выполнении запросов
 };
+
+type TAuthReducer = (state: IAuthState, action: TAuthActions) => IAuthState;
 
 const reducer: TAuthReducer = (state = initialState, action) => {
   
