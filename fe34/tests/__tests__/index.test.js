@@ -4,7 +4,7 @@ const {
   copyArray,
   mutableFunction,
   login
-} = require('./index');
+} = require('../index');
 
 describe('Sum function', () => {
   test('Should sum two variables', () => {
@@ -51,6 +51,24 @@ describe('Mutable function', () => {
   });
 });
 
+/*describe('Login function testing with mock', () => {
+  jest.mock('../__mocks__/axios');
+  const testUserPhoneNumber = '+18465683597';
+  const testUserPassword = '123';
+  const userUniqueId = '5e91ac983ed21bfcc3e35c68';
+
+  it ('Should return user data', () => {
+    login(testUserPhoneNumber, testUserPassword).then((response) => {
+      expect(response._id).toBeDefined();
+    });
+  })
+
+  it ('Work wih resolves', () => {
+    expect(login(testUserPhoneNumber, testUserPassword)).resolves.toHaveProperty('_id', userUniqueId)
+  })
+  
+});*/
+
 describe('Async function: login', () => {
 
   let loginResponse;
@@ -72,6 +90,6 @@ describe('Async function: login', () => {
   });
 
   test('Should return token', async () => {
-    expect(loginResponse    .data.token).toBeDefined();
-  })
+    expect(loginResponse.data.token).toBeDefined();
+  });
 });
