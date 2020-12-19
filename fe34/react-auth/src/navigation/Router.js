@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { comment, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   BrowserRouter,
   Switch,
   Route,
-  Link
 } from 'react-router-dom';
 
 import { Navbar } from '../components';
@@ -25,7 +24,6 @@ class Navigator extends Component {
   }
 
   setUserData = (userData) => {
-    console.log(userData);
     this.setState({ userData });
   }
 
@@ -52,4 +50,8 @@ class Navigator extends Component {
   }
 }
 
+/**
+ * Если mapStateToProps не нужен ( или тоже самое  - если не нужны какие-либо
+ * переменные из редакса), то в connect первым аргументом передается null
+ */
 export default connect(null, { login } )(Navigator);

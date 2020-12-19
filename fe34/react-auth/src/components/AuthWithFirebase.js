@@ -1,6 +1,20 @@
+/**
+ * 1) Этот компонент - тот же самый компонент аутентификации, только
+ * здесь в качестве бэкенда выступает приложение, созданное в Firebase
+ *  */ 
+
+/**
+ * 2) Для связи с веб-приложения с firebase нужна соответствующая npm-библиотека 
+ */
 import firebase from 'firebase';
 import React, { Component } from 'react';
 
+/**
+ * 3) Это объект конфигурации. Все эти вещи выдаются на странице приложения
+ * Firebase и нужны для того, чтобы ваше веб-приложение знало куда именно
+ * стучаться (слать запросы), а также чтобы Firebase был в курсе существования
+ * веб-клиента, который с ним работает.
+ */
 const firebaseConfig = {
   apiKey: "AIzaSyCgyX4v6FEpj5lI-WQ84sbu1jryP57gjUA",
   authDomain: "react-auth-c5d31.firebaseapp.com",
@@ -21,6 +35,11 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    /**
+     * 4) Здесь происходит вызов функции, которая настраивает приватный
+     * канал связи для общения нашего веб-приложения с сервером Firebase. Точнее
+     * с нашим приложением Firebase, которое было там создано
+     */
     firebase.initializeApp(firebaseConfig);
     console.log(firebase);
   }
@@ -43,7 +62,6 @@ class App extends Component {
   }
 
   render () {
-    console.log('render' )
     return (
       <div className="App">
         {this.state.user && (
@@ -62,10 +80,6 @@ class App extends Component {
           value={this.state.password}
         />
         <button onClick={this.login}>Login</button>
-        
-        
-        
-
       </div>
     );
   }
