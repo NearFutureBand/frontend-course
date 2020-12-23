@@ -35,17 +35,15 @@ const signInFailure = (err) => {
 }
 
 export const signIn = (phone, password) => {
-  return async (dispatch) => {
-
+  return async (dispatch, getState) => {
+    //const phone = getState().auth.phone;
     dispatch(signInStart());
-
     try {
       const response = await axios.post('http://localhost:3001/auth/sign-in', {
         phone,
         password,
       });
       dispatch( signInSuccess(response.data) );
-
     } catch (err) {
       console.log('err', err);
       dispatch( signInFailure(err.response.data));
