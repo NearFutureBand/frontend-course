@@ -5,7 +5,7 @@ import './styles.css';
 const CardList = ({ data }) => {
   return (
     <div className="wrapper">
-      {data.map(card => <Card cardData={card} />)}
+      {data.map(card => <Card cardData={card} key={card._id} />)}
     </div>
   );
 }
