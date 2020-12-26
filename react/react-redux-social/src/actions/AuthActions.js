@@ -95,7 +95,7 @@ export const signIn = ({ phone, password, token }) => {
       // 4) Запрос произошел с ошибкой, вызываем подходящий экшен и передаем
       // с помощью него в редакс текст ошибки
       console.log('err', err);
-      dispatch( signInFailure(err.response.data));
+      dispatch( signInFailure(err.response?.data));
     }
     
   }
