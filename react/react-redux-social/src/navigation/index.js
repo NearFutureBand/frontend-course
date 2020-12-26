@@ -7,24 +7,24 @@ import UsersPage from '../pages/Users';
 import ProfilePage from '../pages/Profile';
 import SignInPage from '../pages/SignIn';
 
-import { NavBar } from '../components';
+import { Navbar } from '../components';
 import { ROUTES } from '../const';
 
-import { autoSignIn } from '../actions';
+import { signIn } from '../actions';
 
 class Navigator extends Component {
 
   componentDidMount = () => {
     const token = localStorage.getItem('token');
     if (token) {
-      this.props.autoSignIn(token);
+      this.props.signIn({ token });
     }
   }
 
   render () {
     return (
       <BrowserRouter>
-        <NavBar />
+        <Navbar />
         <Switch>
           <Route path={'/users/:index'} component={ProfilePage} />
           <Route path={ROUTES.USERS} component={UsersPage} />
@@ -37,4 +37,4 @@ class Navigator extends Component {
   }
 };
 
-export default connect(null, { autoSignIn })(Navigator);
+export default connect(null, { signIn })(Navigator);
