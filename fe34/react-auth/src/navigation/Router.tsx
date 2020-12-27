@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import {
   BrowserRouter,
   Switch,
-  Route,
+  Route
 } from 'react-router-dom';
 
 import { Navbar } from '../components';
 import { Users, Profile, Auth } from '../pages';
 import { login } from '../actions';
 
-class Navigator extends Component {
+interface IProps {
+  login: (param: { token: string }) => void;
+}
 
-  state = {
-    userData: null
+class Navigator extends Component<IProps> {
+
+  constructor (props: IProps) {
+    super(props);
   }
 
   componentDidMount = () => {
@@ -23,14 +27,10 @@ class Navigator extends Component {
     }
   }
 
-  setUserData = (userData) => {
-    this.setState({ userData });
-  }
-
   render () {
     return (
       <BrowserRouter>
-        <Navbar userData={this.state.userData} /> 
+        <Navbar /> 
         
         <Switch>
           <Route
@@ -41,7 +41,7 @@ class Navigator extends Component {
           <Route path="/users" component={Users} />
 
           <Route path="/">
-            <Auth setUserData={this.setUserData} />
+            <Auth />
           </Route>
 
         </Switch>

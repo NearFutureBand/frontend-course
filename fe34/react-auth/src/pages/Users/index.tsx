@@ -4,20 +4,27 @@ import { Link } from 'react-router-dom';
 
 import { UserCard } from '../../components';
 import './styles.css';
+import { IUserShortInfo } from '../../types/interfaces';
 
-class Users extends Component {
+interface IState {
+  users: Array<IUserShortInfo>;
+}
 
-  state = {
-    users: []
+class Users extends Component<{}, IState> {
+
+  constructor (props: any) {
+    super(props);
+    this.state = {
+      users: []
+    }
   }
 
-  componentDidMount = async () => {
+  componentDidMount = async (): Promise<void> => {
     const response = await axios.get('http://localhost:3001/users');
     this.setState({users: response.data });
   }
 
   render () {
-    console.log(this.props, this.state);
     return (
       <div className="page page-users">
         <h1>USERS</h1>
