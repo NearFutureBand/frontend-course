@@ -1,0 +1,6 @@
+.page-sign-in {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+}
