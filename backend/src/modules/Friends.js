@@ -29,11 +29,15 @@ router.post('/add-friend', async (ctx) => {
     const _friend = await getUserByIndex(index);
     const friend = shortenUserInfo(_friend);
 
-    // Добавть fiend в массив friends у user
+    // Добавть friend в массив friends у user
     user.friends.push(friend);
 
+    // Добавить user в массив friends у friend
+
+    _friend.friends.push(shortenUserInfo(user));
+
     // Сохранить изменения
-    await updateUserInformation(user);
+    await updateUserInformation([user, _friend]);
 
     ctx.body = {
       text: 'OK'

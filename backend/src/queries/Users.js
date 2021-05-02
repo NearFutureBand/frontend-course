@@ -19,18 +19,17 @@ const getUserByPhone = async (phone) => {
   return result;
 }
 
-const updateUserInformation = async (user) => {
+const updateUserInformation = async (users) => {
   const _usersData = await readFile('../data/users.json');
   const usersData = JSON.parse(_usersData);
-  const index = _.findIndex(usersData, { phone: user.phone });
-  // Если юзер существует, обновить его в БД
-  if (index !== null && index !== undefined && index > -1) {
-    usersData[index] = user;
-    await saveFile('../data/users.json', usersData);
-    console.log('successfully saved');
-  } else {
-    console.log('new user ??');
-  }
+  //const index = _.findIndex(usersData, { phone: users[0].phone });
+
+  users.forEach(u => {
+    usersData[u.index] = u;
+  });
+  
+  await saveFile('../data/users.json', usersData);
+  console.log('successfully saved');
 }
 
 module.exports = {
