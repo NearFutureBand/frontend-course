@@ -47,10 +47,12 @@ class Auth extends Component {
   render () {
     return (
       <div className="page">
-        <h1>AUTHENTICATION</h1>
+        <h1 data-qa="authenticationLabel">AUTHENTICATION</h1>
+        
         {this.state.user && (
-          <span data-qa="greting">Hello, {this.state.user.name.first} {this.state.user.name.last}</span>
+          <span data-qa="greeting">Hello, {this.state.user.name.first} {this.state.user.name.last}</span>
         )}
+
         <input
           data-qa="input-phone"
           type="text"

@@ -1,15 +1,14 @@
-/// <reference types="cypress" />
+
 
 describe('My First Test', () => {
   it('Does not do much!', () => {
     expect(true).to.equal(true)
-  })
+  });
 
 });
 
-
 describe('The Home Page', () => {
-  it('successfully loads', () => {
+  it('should login correctly', () => {
     cy.visit('/')
 
     cy.get("[data-qa='input-phone']").type('+18465683597').should("have.value", "+18465683597");
@@ -20,6 +19,6 @@ describe('The Home Page', () => {
 
     cy.wait(500);
 
-    cy.get("[data-qa='greting']").contains("Hello, Barr Copeland");
+    cy.get("[data-qa='greeting']").contains("Hello, Barr Copeland");
   })
 })
