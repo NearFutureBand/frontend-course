@@ -20,11 +20,13 @@ export const Navbar = () => {
       <Link to={ROUTES.USERS}>Users</Link>
       { token ? (
         <>
-          <Card
-            picture={avatar}
-            name={name}
-            small
-          />
+          <Link to={ROUTES.ME}>
+            <Card
+              picture={avatar}
+              name={name}
+              small
+            />
+          </Link>
           <button onClick={() => dispatch(signOut())}>Sign out</button>
         </>
       ) : (

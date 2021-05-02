@@ -12,8 +12,8 @@ const getClassNames = (small) => {
 };
 
 const Card = ({
-  picture,
-  name,
+  picture = '',
+  name = {},
   small,
   id,
   showId
