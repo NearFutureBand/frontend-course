@@ -1,6 +1,8 @@
 
 export const getIsUserLoggedIn = state => !!state.auth.token;
 
+export const getToken = state => state.auth.token;
+
 export const getProfileLoading = state => state.profile.loading;
 
 export const getProfile = state => {

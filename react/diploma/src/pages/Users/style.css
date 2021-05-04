@@ -2,3 +2,12 @@
   padding-top: 10vh;
   width: 50%;
 }
+
+.user-list-item > div.card:hover {
+  margin: 1rem;
+  
+}
+
+.user-list-item > div.card {
+  transition: all 0.2s ease;
+}

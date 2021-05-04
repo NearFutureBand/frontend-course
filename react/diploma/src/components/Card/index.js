@@ -5,9 +5,9 @@ import './style.css';
 
 const getClassNames = (small) => {
   return {
-    card: `card ${small && 'card-small'}`,
-    cardImage: `card-image ${small && 'card-image-small'}`,
-    cardContent: `card-content ${small && 'card-content-small'}`,
+    card: `card${small ? ' card-small' : ''}`,
+    cardImage: `card-image${small ? ' card-image-small' : ''}`,
+    cardContent: `card-content${small ? ' card-content-small' : ''}`,
   }
 };
 

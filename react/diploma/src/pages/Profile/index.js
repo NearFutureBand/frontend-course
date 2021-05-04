@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useLocation, useParams, Link } from 'react-router-dom';
+import { Redirect, useLocation, useParams, Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
-import { getUser } from '../../actions';
+import { getUser, addFriend } from '../../actions';
 import { Card } from '../../components';
-import { getIsUserLoggedIn, getProfile, getProfileLoading, getLoggedInUser } from '../../selectors';
+import { getIsUserLoggedIn, getProfile, getProfileLoading, getLoggedInUser, getToken } from '../../selectors';
 import { ROUTES } from '../../constants';
 import './style.css';
 
@@ -17,8 +18,10 @@ const Profile = () => {
   const profile = useSelector(getProfile);
   const loading = useSelector(getProfileLoading);
   const loggedInUser = useSelector(getLoggedInUser);
+  const token = useSelector(getToken);
 
   const location = useLocation();
+  const history = useHistory();
 
   const isMe = useMemo(() => location?.pathname === ROUTES.ME, [location?.pathname]);
 
@@ -29,6 +32,23 @@ const Profile = () => {
       dispatch(getUser(userIndex));
     }
   }, [dispatch, userIndex, isMe]);
+
+  const onAddFriend = useCallback(() => {
+    
+    if (!token) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Sign in to add friends!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      history.push(ROUTES.SIGNIN);
+      return;
+    }
+
+    dispatch(addFriend(token, userIndex));
+
+  }, [token, userIndex, history, dispatch]);
 
   if (!userData && !loading) {
     return (
@@ -41,7 +61,7 @@ const Profile = () => {
       <div className="page-profile">
         {isMe && (<h2>Welcome back!</h2>)}
         {loading && <span>Loading...</span>}
-        { userData && (
+        {userData && (
           <Card picture={userData.picture} name={userData.name} />
         )}
         <span className="text-field">{userData?.email}</span>
@@ -49,7 +69,7 @@ const Profile = () => {
         <span className="text-field">{userData?.about}</span>
 
         {(!userData?.isFriend && !isMe) && (
-          <button>Start friendship</button>
+          <button onClick={onAddFriend}>Start friendship</button>
         )}
 
         <div>
@@ -57,10 +77,10 @@ const Profile = () => {
           <div>
             {(userData?.friends || []).map((friend) => (
               <>
-                <Link key={friend.index} to={`users/${friend.index}`}>
+                <Link key={friend.index} to={`/users/${friend.index}`}>
                   <Card {...friend} />
                 </Link>
-                <button>Remove friend</button>
+                {isMe && <button>Remove friend</button>}
               </>
             ))}
             {userData?.friends?.length === 0 && <span>no friends yet :(</span>}

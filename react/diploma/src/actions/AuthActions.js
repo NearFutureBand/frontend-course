@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 import { ACTION_TYPES } from '../constants';
 
@@ -46,14 +47,22 @@ export const signIn = ({ phone, password, token }) => {
         token
       });
 
-      dispatch( signInSuccess(response.data) );
+      dispatch(signInSuccess(response.data));
+      
+      if (!token) {
+        Swal.fire({
+          icon: 'success',
+          title: 'What\'s up brah',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
 
       localStorage.setItem('token', response.data.token);
     } catch (err) {
       console.log('err', err);
       dispatch( signInFailure(err.response?.data));
     }
-    
   }
 }
 
@@ -62,4 +71,15 @@ export const signOut = () => (dispatch) => {
   dispatch({
     type: ACTION_TYPES.SIGN_OUT,
   });
+  Swal.fire({
+    icon: 'info',
+    title: 'Bye bye!',
+    showConfirmButton: false,
+    timer: 1500
+  });
+}
+
+export const updateProfile = () => (dispatch, getState) => {
+  const token = getState().auth.token;
+  dispatch(signIn({ token }));
 }

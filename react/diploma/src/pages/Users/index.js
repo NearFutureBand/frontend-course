@@ -34,6 +34,7 @@ const Users = () => {
         {users.map((item, i) => {
           return (
             <Link
+              className='user-list-item'
               key={item._id}
               to={`/users/${item.index}`}
             >
