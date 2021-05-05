@@ -25,12 +25,19 @@ const Users = () => {
   return (
     <div className="page">
       <div className="page-users">
-        <button onClick={sortUsers}>Sort by name</button>
-        <button
-          onClick={() => setShowIds(showIds)}
-        >
-          {showIds ? 'Hide ID' : 'Show ID'}
-        </button>
+        <div className='label-area'>
+          <span className='page-label'>ALL USERS</span>
+        </div>
+        
+        <div className='white-block'>
+          <button onClick={sortUsers}>Sort by name</button>
+          <button
+            onClick={() => setShowIds(showIds)}
+          >
+            {showIds ? 'Hide ID' : 'Show ID'}
+          </button>
+        </div>
+
         {users.map((item, i) => {
           return (
             <Link

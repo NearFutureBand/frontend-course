@@ -59,20 +59,22 @@ const Profile = () => {
   return (
     <div className="page">
       <div className="page-profile">
-        {isMe && (<h2>Welcome back!</h2>)}
-        {loading && <span>Loading...</span>}
-        {userData && (
-          <Card picture={userData.picture} name={userData.name} />
-        )}
-        <span className="text-field">{userData?.email}</span>
-        <span className="text-field">{userData?.phone}</span>
-        <span className="text-field">{userData?.about}</span>
-
-        {(!userData?.isFriend && !isMe) && (
-          <button onClick={onAddFriend}>Start friendship</button>
-        )}
-
-        <div>
+        <div className='white-block'>
+          {isMe && (<h2>Welcome back!</h2>)}
+          {loading && <span>Loading...</span>}
+          {userData && (
+            <Card picture={userData.picture} name={userData.name} />
+          )}
+        </div>
+        <div className='white-block'>
+          <div className="text-field">{userData?.email}</div>
+          <div className="text-field">{userData?.phone}</div>
+          <div className="text-field">{userData?.about}</div>
+        </div>
+        <div className='white-block'>
+          {(!userData?.isFriend && !isMe) && (
+            <button onClick={onAddFriend}>Start friendship</button>
+          )}
           <h3>Friends: </h3>
           <div>
             {(userData?.friends || []).map((friend) => (

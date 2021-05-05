@@ -12,6 +12,8 @@ import { ROUTES } from '../constants';
 
 import { signIn } from '../actions';
 
+import './styles.css';
+
 class Navigator extends Component {
 
   componentDidMount = () => {
@@ -23,17 +25,19 @@ class Navigator extends Component {
 
   render () {
     return (
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route path={ROUTES.ME} component={ProfilePage} />
-          <Route path={'/users/:index'} component={ProfilePage} />
-          <Route path={ROUTES.USERS} component={UsersPage} />
-          <Route path={ROUTES.SIGNIN} component={SignInPage} />
-          <Route path={ROUTES.MAIN} component={MainPage} />
-        </Switch>
-      
-      </BrowserRouter>
+      <div className='navigator'>
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path={ROUTES.ME} component={ProfilePage} />
+            <Route path={'/users/:index'} component={ProfilePage} />
+            <Route path={ROUTES.USERS} component={UsersPage} />
+            <Route path={ROUTES.SIGNIN} component={SignInPage} />
+            <Route path={ROUTES.MAIN} component={MainPage} />
+          </Switch>
+
+        </BrowserRouter>
+      </div>
     )
   }
 };

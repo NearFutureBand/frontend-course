@@ -4,3 +4,17 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.label-area {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  justify-content: center;
+}

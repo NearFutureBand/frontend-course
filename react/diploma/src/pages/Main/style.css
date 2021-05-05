@@ -2,6 +2,7 @@
   height: 150vh;
   text-align: center;
   padding-top: 5rem;
+  color: white;
 }
 
 .App-logo {
@@ -26,4 +27,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.main-label {
+  width: 50%;
 }

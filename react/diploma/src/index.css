@@ -23,7 +23,6 @@ body {
   min-height: 100vh;
   padding-top: 10vh;
   color: #333;
-  background-color: white;
   display: flex;
   justify-content: center;
 }
@@ -59,4 +58,19 @@ code {
 
 .error-text {
   color: rgb(233, 87, 87);
+}
+
+.white-block {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-label {
+  font-size: 100px;
+  text-shadow: 0 0 20px rgba(0,0,0, 0.6);
+  color: white;
+  font-weight: 800;
 }
