@@ -11,7 +11,7 @@ const { getUserByPhone, getUserByIndex, updateUserInformation } = require('../qu
  *    index: number, - индекс того пользователя которого нужно добавить в друзья
  * }
  */
-router.post('/add-friend', async (ctx) => {
+router.post('/friends', async (ctx) => {
   try {
     const { token, index } = ctx.request.body;
     if (!token) throw new Error('Нет токена текущего пользователя');
@@ -38,6 +38,32 @@ router.post('/add-friend', async (ctx) => {
 
     // Сохранить изменения
     await updateUserInformation([user, _friend]);
+
+    ctx.body = {
+      text: 'OK'
+    }
+  } catch (err) {
+    handleError(err, ctx);
+  }
+});
+
+router.delete('/friends', async (ctx) => {
+  try {
+    const { token, index } = ctx.request.body;
+    if (!token) throw new Error('Нет токена текущего пользователя');
+    if (!index) throw new Error('Нет идентификатора пользователя, который удаляется из друзей');
+
+    // Берем пользователя из базы по его номеру телефона, который извлекаем из токена
+    const user = await getUserByPhone(extractPhoneNumberFromJwt(token));
+
+    // Удаляем друга по индексу и сразу сохраняем новый массив в объект  user
+    user.friends = user.friends.filter(u => u.index !== index);
+    
+    const friend = await getUserByIndex(index);
+
+    friend.friends = friend.friends.filter(u => u.index !== user.index);
+
+    await updateUserInformation([user, friend]);
 
     ctx.body = {
       text: 'OK'
