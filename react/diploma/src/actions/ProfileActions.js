@@ -35,7 +35,7 @@ export const addFriend = (token, index) => async (dispatch) => {
       type: ACTION_TYPES.ADD_FRIEND_START,
     });
 
-    await axios.post('http://localhost:3001/add-friend', {
+    await axios.post('http://localhost:3001/friends', {
       token,
       index
     });
@@ -58,6 +58,39 @@ export const addFriend = (token, index) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: ACTION_TYPES.ADD_FRIEND_FAILURE,
+    });
+  }
+}
+
+export const removeFriend = (token, index) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ACTION_TYPES.REMOVE_FRIEND_START,
+    });
+
+    await axios.delete('http://localhost:3001/friends', {
+      token,
+      index
+    });
+
+    dispatch({
+      type: ACTION_TYPES.REMOVE_FRIEND_SUCCESS,
+    });
+
+    dispatch(getUser(index));
+
+    dispatch(updateProfile());
+
+    Swal.fire({
+      icon: 'info',
+      title: 'Goodbye, friend!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+  } catch (err) {
+    dispatch({
+      type: ACTION_TYPES.REMOVE_FRIEND_FAILURE,
     });
   }
 }

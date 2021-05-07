@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation, useParams, Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
-import { getUser, addFriend } from '../../actions';
+import { getUser, addFriend, removeFriend } from '../../actions';
 import { Card } from '../../components';
 import { getIsUserLoggedIn, getProfile, getProfileLoading, getLoggedInUser, getToken } from '../../selectors';
 import { ROUTES } from '../../constants';
@@ -34,7 +34,6 @@ const Profile = () => {
   }, [dispatch, userIndex, isMe]);
 
   const onAddFriend = useCallback(() => {
-    
     if (!token) {
       Swal.fire({
         icon: 'info',
@@ -45,10 +44,12 @@ const Profile = () => {
       history.push(ROUTES.SIGNIN);
       return;
     }
-
     dispatch(addFriend(token, userIndex));
-
   }, [token, userIndex, history, dispatch]);
+
+  const onRemoveFriend = useCallback((index) => {
+    dispatch(removeFriend(token, index));
+  }, [token, userIndex, dispatch]);
 
   if (!userData && !loading) {
     return (
@@ -82,7 +83,7 @@ const Profile = () => {
                 <Link key={friend.index} to={`/users/${friend.index}`}>
                   <Card {...friend} />
                 </Link>
-                {isMe && <button>Remove friend</button>}
+                {isMe && <button onClick={() => onRemoveFriend(friend.index)}>Remove friend</button>}
               </>
             ))}
             {userData?.friends?.length === 0 && <span>no friends yet :(</span>}
