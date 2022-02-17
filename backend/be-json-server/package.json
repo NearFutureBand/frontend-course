@@ -1,0 +1,14 @@
+{
+  "name": "be-json-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn json-server db.json -m ./node_modules/json-server-auth -p 3001"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0"
+  }
+}
