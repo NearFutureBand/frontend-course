@@ -1,5 +1,5 @@
 const user = {
-   "_id": "5e91ac983ed21bfcc3e35c68",
+   "_id": "5e91ac983ed21bfcc",
     "index": 2,
     "guid": "b4820655-1036-46e7-994c-929291a2ff6b",
     "isActive": true,
@@ -44,14 +44,14 @@ const user = {
     "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
 };
 
-axios = {
-  post: function(url, data) {
-    return new Promise((resolve) => {
-      process.nextTick(() => {
-        resolve(user);
-      });
+const axios = jest.createMockFromModule('axios');
+
+axios.post = function(url, data) {
+  return new Promise((resolve) => {
+    process.nextTick(() => {
+      resolve(user);
     });
-  }
+  });
 }
 
 module.exports = axios;

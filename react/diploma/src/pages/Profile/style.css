@@ -1,0 +1,10 @@
+.page-profile {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-field {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
