@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
@@ -28,26 +28,18 @@ const Main = () => {
         <span className='page-label main-label'>{`JUST FOR EXAMPLE`}</span>
       </div>
       <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
 
       <div className='posts'>
+        <span className='title'>Posts for today</span>
         {posts.map((post) => (
-          <div className='post'>
-            
+          <div className='post' key={post.id}>
             {post.title}
             <h4>{post.user?.name}</h4>
           </div>
         ))}
+        {!posts.length && (
+          <span>There's no anything here :(</span>
+        )}
       </div>
     </div>
   );

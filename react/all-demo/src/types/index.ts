@@ -1,4 +1,5 @@
 export type Post = {
+  id: number;
   user?: {
     name: string
   }

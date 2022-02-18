@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   overflow-x: hidden;
 }
@@ -79,4 +83,11 @@ code {
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   color: white;
   font-weight: 800;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
